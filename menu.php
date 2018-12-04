@@ -13,7 +13,7 @@
             <div id="item_Menu"><a href="index.php" title="Accueil"><img id="logo_BankUP" src="logo.png" alt="Accueil" /></a></div>
             <div id="item_Menu"><a href="index.php" title="Accueil"><i class="fa fa-home"></i> Accueil</a></div>
             <?php if ($_SESSION['connexion']=='') { ?>
-                <div id="item_Menu"><a href="#" title="Se connecter"> Se connecter</a></div>
+                <div id="item_Menu"><a href="connexion.php" title="Se connecter"> Se connecter</a></div>
                 <div id="item_Menu"><a href="inscription.php" title="Ouvrir un compte">Ouvrir un compte</a></div>
             <?php } else {?>
                 <div id="item_Menu"><a href="#" title="Espace client"><i class="fa fa-lock"> Espace client</a></div>
