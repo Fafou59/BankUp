@@ -6,6 +6,9 @@
     if (isset($_SERVER["HTTP_REFERER"])) {
         $origine = $_SERVER["HTTP_REFERER"];
     }
+    else {
+        $origine = "";
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -23,18 +26,18 @@
     <body>
         <form method="post" action="creation_Profil.php" style="border:1px solid #ccc">
             <div class="container">
-                <h1>Création de votre profil</h1>
-                <p>Merci de compléter les informations ci-dessous.</p>
+                <h1>Création de votre compte</h1>
+                <p>Merci de compléter les informations ci-dessous pour que nous puissons ouvrir votre compte.</p>
                 <hr>
 
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td><label for="civilite">Civilité*</label> :</td>
-                        <td id="civilite">
-                            <input type="radio" name="civilite" value="madame" id="madame"  />
-                            <label for="madame">Mme</label>
-                            <input type="radio" name="civilite" value="monsieur" id="monsieur"  />
-                            <label for="monsieur">M.</label>
+                        <td><label for="type_Compte">Type de compte*</label> :</td>
+                        <td id="type_Compte">
+                            <input type="radio" name="type_Compte" value="epargne" id="epargne"  />
+                            <label for="madame">Compte Epargne</label>
+                            <input type="radio" name="type_Compte" value="courant" id="courant"  />
+                            <label for="monsieur">Compte Courant</label>
                         </td> 
                     </tr>
                     <tr>   
