@@ -1,16 +1,9 @@
 <?php
-//Démarrage de la session
-    session_start();
-    $_SESSION['connexion']='';
     include('menu.php');
-    if (isset($_SERVER["HTTP_REFERER"])) {
-        $origine = $_SERVER["HTTP_REFERER"];
-    }
 ?>
 
 <!DOCTYPE HTML>
 <html>
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="code.css" />
@@ -39,11 +32,11 @@
                     </tr>
                     <tr>   
                         <td><label for="nom">Nom</label> :</td>
-                        <td><input type="text" name="nom" id="nom" size="20" minlength="2" maxlength="25" placeholder="Entrez votre nom" autofocus  /></td>   
+                        <td><input type="text" name="nom" id="nom" size="20" minlength="2" maxlength="25" placeholder="Entrez votre nom" /></td>   
                     </tr>
                     <tr>
                         <td><label for="prenom">Prénom</label> :</td>
-                        <td><input type="text" name="prenom" id="prenom" size="20" minlength="2" maxlength="25" placeholder="Entrez votre prénom" autofocus  /></td>
+                        <td><input type="text" name="prenom" id="prenom" size="20" minlength="2" maxlength="25" placeholder="Entrez votre prénom" /></td>
                     </tr>
                     <tr>
                         <td><label for="date_Naissance">Date de naissance</label> :</td>
@@ -70,43 +63,39 @@
                         <td><label>Adresse postale</label> :</td>
                         <td>
                             <label for="numero_Voie">N° de voie</label> :
-                            <input type="text" name="numero_Voie" id="numero_Voie" size="5" minlength="0" maxlength="5" placeholder="Entrez votre n° voie" autofocus  />
+                            <input type="text" name="numero_Voie" id="numero_Voie" size="5" minlength="0" maxlength="5" placeholder="Entrez votre n° voie" />
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
                             <label for="voie">Voie</label> :
-                            <input type="text" name="voie" id="voie" size="75" minlength="" maxlength="75" placeholder="Entrez votre voie" autofocus  />
+                            <input type="text" name="voie" id="voie" size="75" minlength="" maxlength="75" placeholder="Entrez votre voie" />
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>    
                             <label for="code_Postal">Code postal</label> :
-                            <input type="text" name="code_Postal" id="code_Postal" size="5" minlength="5" maxlength="5" placeholder="Entrez votre code postal" autofocus  />
+                            <input type="text" name="code_Postal" id="code_Postal" size="5" minlength="5" maxlength="5" placeholder="Entrez votre code postal" />
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
                             <label for="ville">Ville</label> :
-                            <input type="text" name="ville" id="ville" size="10" minlength="5" maxlength="25" placeholder="Entrez votre ville" autofocus  />
+                            <input type="text" name="ville" id="ville" size="10" minlength="5" maxlength="25" placeholder="Entrez votre ville" />
                         </td>
                     </tr>
 
                     </tr>
                     <tr>
                         <td><label for="email">Adresse mail</label> :</td>
-                        <td><input type="email" name="email" id="email" size="50" minlength="5" maxlength="70" placeholder="Entrez votre adresse mail" autofocus  /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="email">Confirmation</label> :</td>
-                        <td><input type="email" name="email" id="email" size="50" minlength="5" maxlength="70" placeholder="Entrez à nouveau votre adresse mail" autofocus  /></td>
+                        <td><input type="email" name="email" id="email" size="50" minlength="5" maxlength="70" placeholder="Entrez votre adresse mail" /></td>
                     </tr>
                     <tr>
                         <td><label for="telephone">Téléphone</label> :</td>
-                        <td><input type="text" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" autofocus  /></td>
+                        <td><input type="text" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" /></td>
                     </tr>
                     <tr>
                         <td><label for="mdp">Mot de passe</label> :</td>
@@ -121,7 +110,7 @@
             <p>En créant votre profil, vous acceptez nos <a href="#" style="color:dodgerblue">Conditions Générales d'utilisation</a>.</p>
 
             <div class="bouton_Form">
-                <button type="button" class="bouton_Annuler">Annuler</button>
+                <button type="button" class="bouton_Annuler" >Retour</button>
                 <button type="submit" class="bouton_Valider">Valider</button>
             </div>
         </div>

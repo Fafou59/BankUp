@@ -1,3 +1,17 @@
+<?php
+//Démarrage de la session
+    session_start();
+    if (!isset($_SESSION["connecte"])) {
+        $_SESSION["connecte"] = 0;
+    }
+    if (isset($_SERVER["HTTP_REFERER"])) {
+        $origine = $_SERVER["HTTP_REFERER"];
+    }
+    else {
+        $origine = "";
+    }
+?>
+
 <!DOCTYPE HTML>
 <html>
 
@@ -15,13 +29,13 @@
             <div id="item_Menu"><a href="index.php" title="Accueil"> </a></div>
             <div id="item_Menu"></i> </a></div>
             <div id="item_Menu"></i> </a></div>
-            <?php if ($_SESSION['connexion']=='') { ?>
+            <?php if ($_SESSION['connecte']==1) { ?>
+                <div id="item_Menu"><button type="button" onclick="location.href='deconnexion.php'" title="Déconnexion" class="bouton_Connexion">DECONNEXION</button></div>
+                <div id="item_Menu"><button type="button" onclick="location.href='espace_Client.php'" title="Espace Client" class="bouton_Inscription">ESPACE CLIENT</button></div>
+            <?php } else {?>
                 <div id="item_Menu"><button type="button" onclick="location.href='connexion.php'" title="Connexion" class="bouton_Connexion">CONNEXION</button></div>
                 <div id="item_Menu"><button type="button" onclick="location.href='inscription.php'" title="Inscription" class="bouton_Inscription">DEVENIR CLIENT</button></div>
-            <?php } else {?>
-                <div id="item_Menu"><a href="#" title="Espace client">Espace client</a></div>
-                <div id="item_Menu"><a href="#" title="Se déconnecter">Se déconnecter</a></div>
-            <?php } ?>
+           <?php } ?>
         </nav>
     </header>
 

@@ -1,17 +1,5 @@
 <?php
-//Démarrage de la session
-    session_start();
-    $_SESSION['connexion']='';
     include('menu.php');
-    if (isset($_SERVER["HTTP_REFERER"])) {
-        $origine = $_SERVER["HTTP_REFERER"];
-    }
-    else {
-        $origine = "";
-    }
-    if (isset($_POST["mdp"])) {
-        $mdp = (sha1($_POST["mdp"]));
-    }
 ?>
 
 <!DOCTYPE HTML>
@@ -20,6 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="code.css" />
+        <title>BankUP - Profil créé</title>
     </head>
 
     <body>
@@ -82,6 +71,7 @@
         }
         ?> 
 
+<!-- A supprimer, uniquement pour afficher du contenu en test -->
         <div class="container">
             <h1>Votre profil a bien été créé.</h1>
             <p>Un mail vous a été envoyé à l'adresse renseignée.</p>
