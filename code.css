@@ -1,13 +1,26 @@
 /*Code couleur : 
 Bleu : #0DDBD8
 Rose : #E80969
-Gris : #f1f1f1
+Gris : #f1f1f1 --> #55555 plus foncé et plus lisible
 Vert de bouton #4caf50
 */
 
-
+/* Mise en forme générale */
 *{
-  font-family : arial; }
+  font-family : arial;
+  box-sizing: border-box;
+}
+
+/* Mise en forme contenu de base (sans formulaire) */
+#contenu {
+  width: 75%;
+  margin: auto;
+}
+
+/* Image de fond */
+body {
+  background: url('monde.jpg') no-repeat center fixed;
+}
 
 /* Mise en forme de la barre de menu */
 nav {
@@ -25,50 +38,57 @@ nav {
 }
 
 #item_Menu {
-  font-size: 100%;
-  color: white;
   width: 400px;
-  font-weight: bold;
   vertical-align: middle;
 }
 
-a {
+.bouton_Connexion {
+  float: right;
+  font-size: 100%;
   color: white;
-  text-decoration: none;
+  font-weight: bold;
+  background-color: #E80969;
+  box-shadow: 0 2px 0 0 #C40859;
+  margin-right: 5px;
+  margin-bottom: 8px;
+  margin-top: 15px;
 }
 
-a:hover {
-  color: #e20a79;
+.bouton_Inscription {
+  float: right;
+  font-size: 100%;
+  color: white;
+  font-weight: bold;
+  background-color: #555;
+  box-shadow: 0 2px 0 0 #555;
+  margin-right: 14px;
+  margin-bottom: 8px;
+  margin-top: 15px;
+  margin-left: 5px;
 }
 
 
 /* Bouton haut de page */
-
 #bouton_Haut {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position */
-  bottom: 20px; /* Place the button at the bottom of the page */
-  right: 30px; /* Place the button 30px from the right */
-  z-index: 99; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: #E80969; /* Set a background color */
-  color: white; /* Text color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
-  border-radius: 10px; /* Rounded corners */
-  font-size: 18px; /* Increase font size */
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #E80969;
+  padding: 15px;
+  border-radius: 10px;
   width: 50px;
-}
-
-#fleche_Haut {
-  width: 1%;
-  height: 1%;
+  height: 50px;
+  font-size: 20px;
 }
 
 #bouton_Haut:hover {
-  background-color: #555; /* Add a dark-grey background on hover */
+  background-color: #555;
 }
+
 
 /* Mise en forme des formulaires */
 form {
@@ -77,16 +97,10 @@ form {
     background-color: white;
 }
 
-
-* {
-    box-sizing: border-box
+label {
+  font-weight: bold;
 }
 
-body {
-  background: url('monde.jpg') no-repeat center fixed;
-}
-
-/* Full-width input fields */
 input[type=text], input[type=password], input[type=date], input[type=email], #pays, #civilite, #type_Compte {
   width: 100%;
   padding: 15px;
@@ -107,82 +121,71 @@ hr {
   margin-bottom: 25px;
 }
 
-/* Set a style for all buttons */
-button {
-  color: white;
-  padding: 7%;
-  cursor: pointer;
-  border: none;
-  opacity: 0.9;
-  border-radius: 24px;
-  width: 200px;
-}
-
-
-button:hover {
-  opacity:1;
-}
-
-label {
-    font-weight: bold;
-
-}
-
-.bouton_Annuler { 
-    float: left;
-    margin-left: 60%;
-    padding: 14px 20px;
-    background-color: #f1f1f1;
-}
-
-.bouton_Valider {
-  float: right;
-  width: 20%;
-  padding: 14px 20px;
-  background-color: #4CAF50;
-}
-
-.bouton_Connexion {
-  float: right;
-  font-size: 100%;
-  color: white;
-  font-weight: bold;
-  background-color: #E80969;
-  box-shadow: 0 2px 0 0 #C40859;
-  margin-right: 5px;
-  margin-bottom: 8px;
-  margin-top: 16px;
-}
-.bouton_Inscription {
-  float: right;
-  font-size: 100%;
-  color: white;
-  font-weight: bold;
-  background-color: #f1f1f1;
-  box-shadow: 0 2px 0 0 #EEEEEE;
-  margin-right: 14px;
-  margin-bottom: 8px;
-  margin-top: 15px;
-  margin-left: 5px;
-}
-
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* Clear floats */
 .bouton_Form::after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .bouton_Annuler, .bouton_Valider {
-    width: 100%;
-  }
+
+/* Mise en forme des boutons */
+button {
+  color: white;
+  padding: 7%;
+  cursor: pointer;
+  border: none;
+  opacity: 1;
+  border-radius: 24px;
+  width: 200px;
 }
+
+button:hover {
+  opacity:0.9;
+}
+
+.bouton_Valider {
+  float: right;
+  padding: 14px 20px;
+  background-color: #4CAF50;
+  margin-right: 14px;
+  margin-bottom: 8px;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+
+.bouton_Annuler { 
+  float: right;
+  padding: 14px 20px;
+  background-color: #555;
+  margin-right: 14px;
+  margin-bottom: 8px;
+  margin-top: 30px;
+}
+
+.container {
+  padding: 16px;
+}
+
+
+/* Menu EC */
+.lienEC {
+  background-color: #555;
+  border-radius: 0;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.item_EC {
+  display: none;
+  padding: 50px 20px;
+  height: 100%;
+  background-color: white;
+}
+
 

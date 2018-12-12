@@ -26,9 +26,9 @@
         <nav>
             <div id="item_Menu"></i> </a></div>
             <div id="item_Menu"><a href="index.php" title="Accueil"><img id="logo_BankUP" src="logo.png" onclick="location.href='index.php'"alt="Accueil" /></a></div>
-            <div id="item_Menu"><a href="index.php" title="Accueil"> </a></div>
-            <div id="item_Menu"></i> </a></div>
-            <div id="item_Menu"></i> </a></div>
+            <div id="item_Menu"></div>
+            <div id="item_Menu"></div>
+            <div id="item_Menu"></div>
             <?php if ($_SESSION['connecte']==1) { ?>
                 <div id="item_Menu"><button type="button" onclick="location.href='deconnexion.php'" title="Déconnexion" class="bouton_Connexion">DECONNEXION</button></div>
                 <div id="item_Menu"><button type="button" onclick="location.href='espace_Client.php'" title="Espace Client" class="bouton_Inscription">ESPACE CLIENT</button></div>
@@ -39,7 +39,7 @@
         </nav>
     </header>
 
-    <body>
+    <body> <br />
         <button onclick="topFunction()" id="bouton_Haut" title="Haut de la page"><i class="fas fa-angle-up"></i></button>
     </body>
 

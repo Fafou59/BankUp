@@ -1,5 +1,8 @@
 <?php
     include('menu.php');
+    if ($_SESSION['connecte']==1) {
+        header('Location: espace_Client.php');
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -39,7 +42,7 @@
 
         if ($association['prenom']==$_POST['mdp']) {
             $_SESSION['connecte'] = 1;
-            header("Location: index.php");
+            header("Location: espace_Client.php");
         }
         else { ?>
     <body>
@@ -60,14 +63,14 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>
+                        <td> <br />
                             <a href="#" title="Mot de passe oublié">Mot de passe oublié ?</a>
                         </td>
                     </tr>
-                </table>
+                </table><br />
                 <div class="bouton_Form">
-                    <button type="button" class="bouton_Annuler">Annuler</button>
                     <button type="submit" class="bouton_Valider">Valider</button>
+                    <button type="button" class="bouton_Annuler">Annuler</button>
                 </div>
             </div>
         </form>
