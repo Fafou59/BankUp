@@ -26,27 +26,28 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "test";
+        $dbname = "bankup";
 
-        // Create connection
+        // Se connecter à la bdd
         $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
+        // Vérifier connexion
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
-        $requete = $conn->prepare("SELECT nom, prenom FROM test WHERE nom = '".$identifiant."'");
+        // Réaliser requête
+        $requete = $conn->prepare("SELECT adresse_Mail, mdp FROM client WHERE adresse_Mail = '".$identifiant."'");
         $requete->execute();
         $resultat = $requete->get_result();
         $association = $resultat->fetch_assoc();
 
-        if ($association['prenom']==$_POST['mdp']) {
+        if ($association['mdp']==sha1($_POST['mdp'])) {
             $_SESSION['connecte'] = 1;
+            $_SESSION['identifiant'] = $identifiant;
             header("Location: espace_Client.php");
         }
         else { ?>
     <body>
-        <form method="post" action="connexion.php" style="border:1px solid #ccc">
+        <form class="formulaire" method="post" action="connexion.php" style="border:1px solid #ccc">
             <div class="container">
                 <h1>Connexion à votre espace client</h1>
                 <p>Merci de renseigner vos identifiants de connexion.</p>
@@ -79,7 +80,7 @@
     } else {
 ?>
     <body>
-        <form method="post" action="connexion.php" style="border:1px solid #ccc">
+        <form class="formulaire" method="post" action="connexion.php" style="border:1px solid #ccc">
             <div class="container">
                 <h1>Connexion à votre espace client</h1>
                 <p>Merci de renseigner vos identifiants de connexion.</p>

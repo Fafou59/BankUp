@@ -91,7 +91,7 @@ nav {
 
 
 /* Mise en forme des formulaires */
-form {
+.formulaire {
     width: 75%;
     margin: auto;
     background-color: white;
