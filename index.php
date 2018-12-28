@@ -11,10 +11,14 @@
         <title>BankUP - Accueil</title>
     </head>
 
+    
 
     <body>
+    <?php
+        include('slideshow.php');
+    ?>
         <div>
-            
+        
         </div>
 
     </body>

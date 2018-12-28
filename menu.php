@@ -35,6 +35,7 @@
             <?php } else {?>
                 <div id="item_Menu"><button type="button" onclick="location.href='connexion.php'" title="Connexion" class="bouton_Connexion">CONNEXION</button></div>
                 <div id="item_Menu"><button type="button" onclick="location.href='inscription.php'" title="Inscription" class="bouton_Inscription">DEVENIR CLIENT</button></div>
+                <div id="item_Menu"></div>
            <?php } ?>
         </nav>
     </header>
