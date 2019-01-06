@@ -17,7 +17,7 @@
 
 <body>
 
-<div class="slideshow-container">
+<div class="slideshow-container" style="margin-left:5px; margin-right:5px;">
 
 <div class="mySlides fade">
   

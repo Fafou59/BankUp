@@ -196,7 +196,6 @@ img {vertical-align: middle;}
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
   position: relative;
   margin: auto;
 }
@@ -228,25 +227,6 @@ img {vertical-align: middle;}
   background-color: rgba(0,0,0,0.8);
 }
 
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
 
 /* The dots/bullets/indicators */
 .dot {
@@ -362,5 +342,46 @@ padding: 50px 300px 0px 10px;
 .button:hover {
   background-color: #555;
 }
+
+input[type=textsearch] {
+  width: 15%;
+  border: none;
+  color: #f1f1f1;
+  background-color: #0DDBD8;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=textsearch]:focus {
+  width: 100%;
+}
+
+/*input[type="textsearch"]::placeholder{color: red;}*/
+
+/* Style the header: fixed position (always stay at the top) */
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+/* The progress container (grey background) */
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+}
+
+/* The progress bar (scroll indicator) */
+.progress-bar {
+  height: 8px;
+  background: #4caf50;
+  width: 0%;
+}
+
+
 
 
