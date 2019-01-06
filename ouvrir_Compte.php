@@ -1,5 +1,8 @@
 <?php
     include('menu.php');
+    if ($_SESSION['connecte']!=1) {
+        header('Location: connexion.php');
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -14,8 +17,8 @@
     <body>
         <div id="contenu">
         <?php
-            if ((!isset($_POST['civilite'])) OR (!isset($_POST["mdp"])) OR (!isset($_POST['telephone'])) OR (!isset($_POST['email'])) OR (!isset($_POST['ville'])) OR (!isset($_POST['code_Postal'])) OR (!isset($_POST['voie'])) OR (!isset($_POST['numero_Voie'])) OR (!isset($_POST['nom'])) OR (!isset($_POST['prenom'])) OR (!isset($_POST['date_Naissance'])) OR (!isset($_POST['pays']))) { ?>
-                 <form method="post" action="creation_Compte.php" style="border:1px solid #ccc">
+            if ((!isset($_POST['type_Compte'])) OR (!isset($_POST["libelle_Compte"]))) { ?>
+                 <form method="post" action="ouvrir_Compte.php" style="border:1px solid #ccc">
             <div class="container">
                 <h1>Création de votre compte</h1>
                 <p>Merci de compléter les informations ci-dessous.</p>
@@ -26,9 +29,9 @@
                         <td><label for="type_Compte">Type de compte*</label> :</td>
                         <td id="type_Compte">
                             <input type="radio" name="type_Compte" value="epargne" id="epargne"  />
-                            <label for="madame">Compte Epargne</label>
+                            <label for="epargne">Compte Epargne</label>
                             <input type="radio" name="type_Compte" value="courant" id="courant"  />
-                            <label for="monsieur">Compte Courant</label>
+                            <label for="courant">Compte Courant</label>
                         </td> 
                     </tr>
                     <tr>   
@@ -47,28 +50,14 @@
         </form>
         <?php
             } else {
-                if ($_POST['civilite'] == "monsieur") {
-                    $civilite = "H";
-                }
-                else {
-                    $civilite = "F";
-                }
-                $nom = $_POST['nom'];
-                $date_Naissance = $_POST['date_Naissance'];
-                $prenom = $_POST['prenom'];
-                $pays = $_POST['pays'];
-                $numero_Voie = $_POST['numero_Voie'];
-                $voie = $_POST['voie'];
-                $code_Postal = $_POST['code_Postal'];
-                $ville = $_POST['ville'];
-                $email = $_POST['email'];
-                $telephone = $_POST['telephone'];
-                $mdp = sha1($_POST['mdp']);
-                if (substr($code_Postal,0,2)==75) {
-                    $agence = 2;
-                } else {
-                    $agence = 1;
-                }
+                $type_Compte = $_POST['type_Compte'];
+                $libelle_Compte = $_POST['libelle_Compte'];
+                $pays = $_POST['libelle_Compte'];
+                $date = date('Y/m/d');
+                $iban = "FR".trim(rand(100000000,999999999)).trim(rand(10000000,99999999)).trim(rand(10000000,99999999));
+                $solde_Compte = 2000;
+                $bic = "BKUPFRPP";
+                $autorisation_Decouvert = 100;
 
                 $servername = "localhost";
                 $username = "root";
@@ -82,8 +71,8 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $sql = "INSERT INTO client (civilite, nom, prenom, date_Naissance, adresse_Mail, telephone, num_Voie, voie, code_Postal, ville, mdp, agence)
-                VALUES ('".$civilite."', '".$nom."', '".$prenom."', '".$date_Naissance."', '".$email."', '".$telephone."', '".$numero_Voie."', '".$voie."', '".$code_Postal."', '".$ville."', '".$mdp."','".$agence."')";
+                $sql = "INSERT INTO compte (date_Ouverture_Compte, type_Compte, solde_Compte, libelle_Compte, iban_Compte, bic_Compte, autorisation_Decouvert_Compte, id_Detenteur_Compte)
+                VALUES ('".$date."', '".$type_Compte."', '".$solde_Compte."', '".$libelle_Compte."', '".$iban."', '".$bic."', '".$autorisation_Decouvert."', '".$_SESSION["id"]."')";
 
                 if ($conn->query($sql) === TRUE) { ?>
                     <div class="container">
@@ -91,7 +80,7 @@
                         <p>Vous avez bénéficié de notre offre d'accueil de 1000€ ! Ils ont bien été ajoutés à votre compte..</p>
                         <hr>
                         <div class="bouton_Form">
-                            <button type="submit" class="bouton_Valider" onclick="location.href='espace_CLient.php'">Aller sur votre espace client</button>
+                            <button type="submit" class="bouton_Valider" onclick="location.href='espace_Client.php'">Aller sur votre espace client</button>
                         </div>
                     </div> <?php
                 } else {

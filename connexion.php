@@ -35,14 +35,15 @@
             die("Connection failed: " . $conn->connect_error);
         }
         // Réaliser requête
-        $requete = $conn->prepare("SELECT adresse_Mail, mdp FROM client WHERE adresse_Mail = '".$identifiant."'");
+        $requete = $conn->prepare("SELECT id_Client, adresse_Mail_Client, mdp_Client FROM client WHERE adresse_Mail_Client = '".$identifiant."'");
         $requete->execute();
         $resultat = $requete->get_result();
         $association = $resultat->fetch_assoc();
 
-        if ($association['mdp']==sha1($_POST['mdp'])) {
+        if ($association['mdp_Client']==sha1($_POST['mdp'])) {
             $_SESSION['connecte'] = 1;
             $_SESSION['identifiant'] = $identifiant;
+            $_SESSION['id'] = $association['id_Client'];
             header("Location: espace_Client.php");
         }
         else { ?>

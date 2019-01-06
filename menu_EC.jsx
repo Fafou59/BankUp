@@ -1,15 +1,15 @@
-function openPage(pageName, elmnt, color) {
+  function openPage(pageName, elmnt, color) {
     // Hide all elements with class="tabcontent" by default */
-    var i, item_EC, lienEC;
-    item_EC = document.getElementsByClassName("item_EC");
-    for (i = 0; i < item_EC.length; i++) {
-      item_EC[i].style.display = "none";
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("item_EC");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
     }
   
     // Remove the background color of all tablinks/buttons
-    lienEC = document.getElementsByClassName("lienEC");
-    for (i = 0; i < lienEC.length; i++) {
-      lienEC[i].style.backgroundColor = "";
+    tablinks = document.getElementsByClassName("lienEC");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].style.backgroundColor = "";
     }
   
     // Show the specific tab content
@@ -21,3 +21,4 @@ function openPage(pageName, elmnt, color) {
   
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen").click();
+  

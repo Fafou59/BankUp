@@ -147,8 +147,8 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $sql = "INSERT INTO client (civilite, nom, prenom, date_Naissance, adresse_Mail, telephone, num_Voie, voie, code_Postal, ville, mdp, agence)
-                VALUES ('".$civilite."', '".$nom."', '".$prenom."', '".$date_Naissance."', '".$email."', '".$telephone."', '".$numero_Voie."', '".$voie."', '".$code_Postal."', '".$ville."', '".$mdp."','".$agence."')";
+                $sql = "INSERT INTO client (civilite_Client, nom_Client, prenom_Client, date_Naissance_Client, adresse_Mail_Client, telephone_Client, num_Voie_Client, voie_Client, code_Postal_Client, ville_Client, mdp_Client, agence_Client, pays_Client)
+                VALUES ('".$civilite."', '".$nom."', '".$prenom."', '".$date_Naissance."', '".$email."', '".$telephone."', '".$numero_Voie."', '".$voie."', '".$code_Postal."', '".$ville."', '".$mdp."','".$agence."','".$pays."')";
 
                 if ($conn->query($sql) === TRUE) { ?>
                     <div class="container">
