@@ -52,6 +52,13 @@ nav {
   margin-right: 15px;
   margin-bottom: 8px;
   margin-top: 15px;
+  border-radius: 24px;
+  width: 150px;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  opacity: 1;
 }
 
 .bouton_Inscription {
@@ -65,29 +72,15 @@ nav {
   margin-bottom: 8px;
   margin-top: 15px;
   margin-left: 0px;
-}
-
-
-/* Bouton haut de page */
-#bouton_Haut {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
+  border-radius: 24px;
+  width: 150px;
+  height: 30px;
+  cursor: pointer;
   border: none;
-  outline: none;
-  background-color: #E80969;
-  padding: 15px;
-  border-radius: 10px;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
+  outline: 0;
+  opacity: 1;
 }
 
-#bouton_Haut:hover {
-  background-color: #555;
-}
 
 
 /* Mise en forme des formulaires */
@@ -102,7 +95,7 @@ label {
 }
 
 input[type=text], input[type=password], input[type=date], input[type=email], #pays, #civilite, #type_Compte {
-  width: 100%;
+  width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
@@ -128,46 +121,69 @@ hr {
 }
 
 
-/* Mise en forme des boutons */
-button {
-  color: white;
-  padding: 7%;
-  cursor: pointer;
-  border: none;
-  opacity: 1;
-  border-radius: 24px;
-  width: 150px;
-}
 
-button:hover {
-  opacity:0.9;
-}
+/* Mise en page des boutons Valider/Annuler*/
 
 .bouton_Valider {
   float: right;
-  padding: 14px 20px;
   background-color: #4CAF50;
   margin-right: 14px;
   margin-bottom: 8px;
   margin-top: 30px;
   margin-left: 5px;
+  border-radius: 24px;
+  width: 150px;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  opacity: 1;
 }
 
 .bouton_Annuler { 
   float: right;
-  padding: 14px 20px;
   background-color: #555;
   margin-right: 14px;
   margin-bottom: 8px;
   margin-top: 30px;
+  border-radius: 24px;
+  width: 150px;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  opacity: 1;
 }
 
-.container {
+/*Bouton remonter en haut*/
+#bouton_Haut {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #E80969;
+  padding: 15px;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+#bouton_Haut:hover {
+  background-color: #555;
+}
+
+      /* Mise en page du menu de l'espace client*/
+     
+/*.container {
   padding: 16px;
-}
+}*/
 
 
-/* Menu EC */
+/* Menu EspaceClient */
 .lienEC {
   background-color: #555;
   border-radius: 0;
@@ -176,8 +192,8 @@ button:hover {
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
+  padding: 10px 0px;
+  font-size: 100%;
   width: 25%;
 }
 
@@ -359,28 +375,7 @@ input[type=textsearch]:focus {
 
 /*input[type="textsearch"]::placeholder{color: red;}*/
 
-/* Style the header: fixed position (always stay at the top) */
-.header {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  background-color: #f1f1f1;
-}
 
-/* The progress container (grey background) */
-.progress-container {
-  width: 100%;
-  height: 8px;
-  background: #ccc;
-}
-
-/* The progress bar (scroll indicator) */
-.progress-bar {
-  height: 8px;
-  background: #4caf50;
-  width: 0%;
-}
 
 
 

@@ -34,13 +34,9 @@
             <?php } else {?>
                 <div id="item_Menu"><button type="button" onclick="location.href='connexion.php'" title="Connexion" class="bouton_Connexion">CONNEXION</button></div>
                 <div id="item_Menu"><button type="button" onclick="location.href='inscription.php'" title="Inscription" class="bouton_Inscription">DEVENIR CLIENT</button></div>
-                <input type="textsearch"  name="search" placeholder="&#128269;" style="font-size: 90%; font-family : arial; font-weight: bold; border: none;
-  outline: none";>
            <?php } ?>
+                <div id="item_Menu"></div>
         </nav>
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar"></div>
-        </div>    
     </header>
 
     <body> <br />

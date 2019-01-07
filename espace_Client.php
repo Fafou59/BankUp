@@ -19,27 +19,16 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Réaliser requête client
-    //$requete = $conn->prepare("SELECT client.*, agence.* FROM client, agence WHERE client.id_Client = '".$_SESSION['id']."' AND agence.id_Agence = client.id_Client");
-    $requete = $conn->prepare("SELECT client.* FROM client WHERE client.id_Client = '".$_SESSION['id']."'");
+    $requete = $conn->prepare("SELECT client.*, agence.* FROM client, agence WHERE client.id_Client = '".$_SESSION['id']."' AND agence.id_Agence = client.id_Client");
     $requete->execute();
     $resultat = $requete->get_result();
     $client = $resultat->fetch_assoc();
-
-    //Réaliser requête agence
-    $requete = $conn->prepare("SELECT agence.* FROM agence, client WHERE client.agence_Client = agence.id_Agence");
-    $requete->execute();
-    $resultat = $requete->get_result();
-    $agence = $resultat->fetch_assoc();
 
     // Réaliser requête compte
     $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_SESSION['id']."' = compte.id_Detenteur_Compte");
     $requete->execute();
     $resultat = $requete->get_result();
-
-    // Réaliser requête bénéficiaires
-    $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE '".$_SESSION['id']."' = beneficiaire.id_Client_Emetteur");
-    $requete3->execute();
-    $resultat3 = $requete3->get_result();
+    //$compte = $resultat->fetch_row();
     
 ?>
 
@@ -56,16 +45,17 @@
 
     <body>
         <div id="contenu">
-            <button class="lienEC" onclick="openPage('informations', this, '#E80969')" id="defaultOpen">Vos informations</button>
-            <button class="lienEC" onclick="openPage('comptes', this, '#E80969')" >Vos comptes</button>
-            <button class="lienEC" onclick="openPage('virement', this, '#E80969')">Faire un virement</button>
-            <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')">Vos bénéficiaires</button>
+            <button class="lienEC" onclick="openPage('informations', this, '#E80969')" style="width: 25%" id="defaultOpen">Vos informations</button>
+            <button class="lienEC" onclick="openPage('comptes', this, '#E80969')"style="width: 25%" >Vos comptes</button>
+            <button class="lienEC" onclick="openPage('virement', this, '#E80969')" style="width: 25%">Faire un virement</button>
+            <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')" style="width: 25%" >Vos bénéficiaires</button>
 
             <div id="informations" class="item_EC">
-                <h1>Vos informations</h1>
-                <p>Vous pouvez modifier vos informations. N'oubliez pas de valider.</p>
                 <form method="post" action="modif_Infos.php" style="border:1px solid #ccc">
                     <div class="container">
+                        <h1>Vos informations</h1>
+                        <p>Vous pouvez modifier vos informations. N'oubliez pas de valider.</p>
+                        <hr>
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td><label for="civilite">Civilité</label> :</td>
@@ -157,7 +147,7 @@
                 <br /><hr>
                 <h2>Votre agence</h2>
                 <div>
-                    <?php echo("BankUP ".$agence['ville_Agence']."<br />".$agence['num_Voie_Agence']." ".$agence['voie_Agence']."<br />".$agence['code_Postal_Agence']." ".$agence['ville_Agence']."<br />"); ?>
+                    <?php echo("BankUP ".$client['ville_Agence']."<br />".$client['num_Voie_Agence']." ".$client['voie_Agence']."<br />".$client['code_Postal_Agence']." ".$client['ville_Agence']."<br />"); ?>
                 </div>
             </div>
 
@@ -168,7 +158,7 @@
                 <?php 
                     $i = 1;
                     while($compte = $resultat->fetch_row()) {
-                        echo("<p><h3>Compte ".$i." :</h3><b>Libellé du compte : ".$compte[4]."</b><br />Date ouverture : ".$compte[1]."<br />Type : ".$compte[2]."<br />Solde : ".$compte[3]."€<br />IBAN : ".$compte[5]."<br />BIC : ".$compte[6]."<br />Autorisation découvert : ".$compte[7]."€</p>");                      
+                        echo("<p><h3>Compte ".$i." :</h3>Id compte : ".$compte[0]."<br />Libellé du compte : ".$compte[4]."<br />Date ouverture : ".$compte[1]."<br />Type : ".$compte[2]."<br />Solde : ".$compte[3]."€<br />IBAN : ".$compte[5]."<br />BIC : ".$compte[6]."<br />Autorisation découvert : ".$compte[7]."€</p>");                      
                         
                         //Gérer les CB et chéquiers
                         if ($compte[2]=="courant") {
@@ -217,42 +207,9 @@
             </div>
 
             <div id="beneficiaires" class="item_EC">
-                <h1>Vos bénéficiaires</h1>
-                <p>
-                    Vous trouverez ci-dessous la liste de vos bénéficiaires.<br />
-                    Vous pouvez ajouter un bénéficiaire avec le formulaire ci-dessous, et supprimer les bénéficiaires déjà enregistrés.
-                </p>
-                <hr>
-                <h3>Ajout d'un bénéficiaire</h3>
-                <p>Merci de compléter les informations ci-dessous pour ajouter un bénéficiaire.</p>
-                <form class="formulaire" method="post" action="creation_Beneficiaire.php" style="border:1px solid #ccc">
-                    <div class="container">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><label for="libelle_Beneficiaire">Libellé du bénéficiaire</label> :</td>
-                                <td><input type="text" name="libelle_Beneficiaire" id="libelle_Beneficiaire" size="20" minlength="2" maxlength="25" placeholder="Entrez le libellé du bénéficiaire" required /></td>
-                            </tr>
-                            <tr>   
-                                <td><label for="iban">IBAN</label> :</td>
-                                <td><input type="text" name="iban" id="iban" size="27" minlength="27" maxlength="27" placeholder="Entrez l'IBAN du bénéficiaire" required /></td>   
-                            </tr>
-                        </table>
-                        <div class="bouton_Form">
-                            <button type="submit" class="bouton_Valider">Ajouter</button>
-                        </div>
-                    </div>
-                </form>
-                <p>
-                    <h3>Vos bénéficiaires enregistrés</h3>
-                    <?php 
-                    $i = 1;
-                    while($beneficiaire = $resultat3->fetch_row()) {
-                        echo("<p><h4>Bénéficiaire ".$i." :</h4><b>Libellé du bénéficiaire : ".$beneficiaire[2]."</b><br />Statut : ".$beneficiaire[3]."</p>");                      
-                        echo "<hr>";
-                        $i = $i + 1;
-                    }
-                    ?>
-                </p>
+                <h1>Vos bénéficiares</h1>
+                <p>REQUETES SQL liste bénéficiaires + bouton ajout bénéficiaire</p>
+            </div>
             </div>
         </div>
 

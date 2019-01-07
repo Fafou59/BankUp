@@ -48,6 +48,8 @@
         }
         else { ?>
     <body>
+        
+
         <form class="formulaire" method="post" action="connexion.php" style="border:1px solid #ccc">
             <div class="container">
                 <h1>Connexion à votre espace client</h1>
