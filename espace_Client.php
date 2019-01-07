@@ -58,7 +58,7 @@
         <div id="contenu">
             <button class="lienEC" onclick="openPage('informations', this, '#E80969')" id="defaultOpen">Vos informations</button>
             <button class="lienEC" onclick="openPage('comptes', this, '#E80969')" >Vos comptes</button>
-            <button class="lienEC" onclick="openPage('virement', this, '#E80969')">Faire un virement</button>
+            <button class="lienEC" onclick="openPage('operations', this, '#E80969')">Vos opérations</button>
             <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')">Vos bénéficiaires</button>
 
             <div id="informations" class="item_EC">
@@ -211,9 +211,9 @@
                 <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'">Ouvrir un compte</button><br /><br />
             </div>
 
-            <div id="virement" class="item_EC">
-                <h1>Faire un virement</h1>
-                <p>Formulaire pour réaliser virement</p>
+            <div id="operations" class="item_EC">
+                <h1>Vos opérations</h1>
+                <p>Liste des opérations passées + lien vers formulaire virement</p>
             </div>
 
             <div id="beneficiaires" class="item_EC">
@@ -244,11 +244,19 @@
                 </form>
                 <p>
                     <h3>Vos bénéficiaires enregistrés</h3>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <?php 
                     $i = 1;
+                    echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</tr>");
                     while($beneficiaire = $resultat3->fetch_row()) {
-                        echo("<p><h4>Bénéficiaire ".$i." :</h4><b>Libellé du bénéficiaire : ".$beneficiaire[2]."</b><br />Statut : ".$beneficiaire[3]."</p>");                      
-                        echo "<hr>";
+                        if ($beneficiaire[3]==1) {
+                            echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>Actif</td>"); ?>
+                            <td><form method="post" action="virement.php">
+                                <button name="id_Beneficiaire" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
+                            </form></td></tr>
+                        <?php } else {
+                            echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td>");
+                        }
                         $i = $i + 1;
                     }
                     ?>

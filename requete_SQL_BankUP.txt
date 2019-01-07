@@ -75,6 +75,7 @@ CREATE TABLE beneficiaire
 (
     id_Compte_Beneficiaire INT NOT NULL,
     id_Client_Emetteur INT NOT NULL,
+    libelle_Beneficiaire VARCHAR(30),
     validite_Beneficiaire BOOLEAN NOT NULL,
     FOREIGN KEY (id_Compte_Beneficiaire) REFERENCES compte(id_Compte),
     FOREIGN KEY (id_Client_Emetteur) REFERENCES client(id_Client),
