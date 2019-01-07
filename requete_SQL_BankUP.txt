@@ -73,12 +73,12 @@ CREATE TABLE compte
 
 CREATE TABLE beneficiaire
 (
-    id_Client INT NOT NULL,
-    id_Beneficiaire INT NOT NULL,
-    validite BOOLEAN NOT NULL,
-    FOREIGN KEY (id_Client) REFERENCES client(id),
-    FOREIGN KEY (id_Beneficiaire) REFERENCES compte(id),
-    PRIMARY KEY (id_Client, id_Beneficiaire)
+    id_Compte_Beneficiaire INT NOT NULL,
+    id_Client_Emetteur INT NOT NULL,
+    validite_Beneficiaire BOOLEAN NOT NULL,
+    FOREIGN KEY (id_Compte_Beneficiaire) REFERENCES compte(id_Compte),
+    FOREIGN KEY (id_Client_Emetteur) REFERENCES client(id_Client),
+    PRIMARY KEY (id_Compte_Beneficiaire, id_Client_Emetteur)
 )
 
 
