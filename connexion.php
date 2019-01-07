@@ -53,7 +53,7 @@
                 <h1>Connexion à votre espace client</h1>
                 <p>Merci de renseigner vos identifiants de connexion.</p>
                 <hr>
-                <p style="color:red">Nom d'utilisateur ou mot de passe éroné, veuillez réessayer.</p>
+                <p style="color:red">Nom d'utilisateur ou mot de passe érroné, veuillez réessayer.</p>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>   
                         <td><label for="identifiant">Identifiant</label> :</td>

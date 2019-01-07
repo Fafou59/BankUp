@@ -29,6 +29,7 @@
     $requete->execute();
     $resultat = $requete->get_result();
     //$compte = $resultat->fetch_row();
+    
 ?>
 
 <!DOCTYPE HTML>
@@ -155,14 +156,47 @@
                 <p>Vous pouvez consulter ci-dessous vos comptes.<br />Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
                 <hr>
                 <?php 
-                    //echo("<p>Compte 1 :<br />".$compte['libelle_Compte']."<br />Type : ".$compte['type_Compte']."<br />Solde : ".$compte['solde_Compte']."<br />IBAN : ".$compte['iban_Compte']."<br />BIC : ".$compte['bic_Compte']."<br />Date ouverture : ".$compte['date_Ouverture_Compte']."<br />Autorisation découvert : ".$compte['autorisation_Decouvert_Compte']);
                     $i = 1;
                     while($compte = $resultat->fetch_row()) {
-                        echo("<h3>Compte ".$i." :</h3>Libellé du compte : ".$compte[4]."<br />Date ouverture : ".$compte[1]."<br />Type : ".$compte[2]."<br />Solde : ".$compte[3]."€<br />IBAN : ".$compte[5]."<br />BIC : ".$compte[6]."<br />Autorisation découvert : ".$compte[7]);
+                        echo("<p><h3>Compte ".$i." :</h3>Id compte : ".$compte[0]."<br />Libellé du compte : ".$compte[4]."<br />Date ouverture : ".$compte[1]."<br />Type : ".$compte[2]."<br />Solde : ".$compte[3]."€<br />IBAN : ".$compte[5]."<br />BIC : ".$compte[6]."<br />Autorisation découvert : ".$compte[7]."€</p>");                      
+                        
+                        //Gérer les CB et chéquiers
+                        if ($compte[2]=="courant") {
+                            //CB
+                            $requete = $conn->prepare("SELECT cb.* FROM cb WHERE cb.id_Compte_Rattache = ".$compte[0]);
+                            $requete->execute();
+                            $resultat2 = $requete->get_result();
+                            $cb = $resultat2->fetch_assoc();
+                            if ($cb['id_Compte_Rattache']==$compte[0]) {
+                                echo("<p><h4>Carte bancaire associée :</h4>Numéro de carte : ".$cb['num_Cb']."<br />Cryptogramme : ".$cb['cryptogramme_Cb']."<br />Date expiration : ".$cb['date_Expiration_Cb']."</p>");
+                            } else {
+                                ?>
+                                <form method="post" action="creation_Cb.php">
+                                    <button name="id_Compte" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
+                                </form>
+                            <?php }
+                            
+                            //Chéquier
+                            $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$compte[0]);
+                            $requete->execute();
+                            $resultat2 = $requete->get_result();
+                            $chequier = $resultat2->fetch_assoc();
+                            if ($chequier['id_Compte_Rattache']==$compte[0]) {
+                                echo("<p><h4>Chequier associé :</h4>Date d'émission : ".$chequier['date_Emission_Chequier']."</p>"); ?>
+                                <form method="post" action="creation_Chequier.php">
+                                    <button name="id_Compte" type="submit" class="bouton_Chequier" value="<?php echo ($compte[0]) ?>">Demander un nouveau chéquier</button><br /><br />
+                                </form>
+                            <?php } else {
+                                ?>
+                                <form method="post" action="creation_Chequier.php">
+                                    <button name="id_Compte" type="submit" class="bouton_Chequier" value="<?php echo ($compte[0]) ?>">Demander un chéquier</button><br /><br />
+                                </form>
+                            <?php }
+                        }
+
                         echo "<hr>";
                         $i = $i + 1;
                     }
-
                 ?>
                 <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'">Ouvrir un compte</button><br /><br />
             </div>

@@ -130,9 +130,9 @@
                 $telephone = $_POST['telephone'];
                 $mdp = sha1($_POST['mdp']);
                 if (substr($code_Postal,0,2)==75) {
-                    $agence = 2;
-                } else {
                     $agence = 1;
+                } else {
+                    $agence = 2;
                 }
 
                 $servername = "localhost";
