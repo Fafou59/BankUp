@@ -6,12 +6,10 @@
     if (!isset($_SESSION['id'])) {
         header("Location: connexion.php");
     }
-
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "bankup";
-
     // Se connecter à la bdd
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Vérifier connexion
@@ -24,18 +22,15 @@
     $requete->execute();
     $resultat = $requete->get_result();
     $client = $resultat->fetch_assoc();
-
     //Réaliser requête agence
     $requete = $conn->prepare("SELECT agence.* FROM agence, client WHERE client.agence_Client = agence.id_Agence");
     $requete->execute();
     $resultat = $requete->get_result();
     $agence = $resultat->fetch_assoc();
-
     // Réaliser requête compte
     $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_SESSION['id']."' = compte.id_Detenteur_Compte");
     $requete->execute();
     $resultat = $requete->get_result();
-
     // Réaliser requête bénéficiaires
     $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE '".$_SESSION['id']."' = beneficiaire.id_Client_Emetteur");
     $requete3->execute();
@@ -172,7 +167,6 @@
                 $i = 1;
                 while($compte = $resultat->fetch_row()) {
                     echo("<p><h3>Compte ".$i." :</h3><b>Libellé du compte : ".$compte[4]."</b><br />Date ouverture : ".$compte[1]."<br />Type : ".$compte[2]."<br />Solde : ".$compte[3]."€<br />IBAN : ".$compte[5]."<br />BIC : ".$compte[6]."<br />Autorisation découvert : ".$compte[7]."€</p>");                      
-
                     //Gérer les CB et chéquiers
                     if ($compte[2]=="courant") {
                         //CB
@@ -188,7 +182,6 @@
                                 <button name="id_Compte" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
                             </form>
                         <?php }
-
                         //Chéquier
                         $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$compte[0]);
                         $requete->execute();
@@ -206,7 +199,6 @@
                             </form>
                         <?php }
                     }
-
                     echo "<hr>";
                     $i = $i + 1;
                 }

@@ -55,11 +55,7 @@
                 $pays = $_POST['libelle_Compte'];
                 $date = date('Y/m/d');
                 $iban = "FR".trim(rand(100000000,999999999)).trim(rand(10000000,99999999)).trim(rand(10000000,99999999));
-                if $type_Compte == "courant" {
-                    $solde_Compte = 1000;
-                } else {
-                    $solde_Compte = 0;
-                }
+                $solde_Compte = 1000;
                 $bic = "BKUPFRPP";
                 $autorisation_Decouvert = 100;
 
