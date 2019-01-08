@@ -62,22 +62,18 @@
                 }
                 $bic = "BKUPFRPP";
                 $autorisation_Decouvert = 100;
-
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
                 $dbname = "bankup";
-
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
-
                 $sql = "INSERT INTO compte (date_Ouverture_Compte, type_Compte, solde_Compte, libelle_Compte, iban_Compte, bic_Compte, autorisation_Decouvert_Compte, id_Detenteur_Compte)
                 VALUES ('".$date."', '".$type_Compte."', '".$solde_Compte."', '".$libelle_Compte."', '".$iban."', '".$bic."', '".$autorisation_Decouvert."', '".$_SESSION["id"]."')";
-
                 if ($conn->query($sql) === TRUE) { ?>
                     <div class="container">
                         <h1>Votre compte a bien été créé.</h1>

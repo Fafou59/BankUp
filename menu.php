@@ -24,8 +24,8 @@
 
     <header>
         <nav>
-            <div id="item_Menu"></i> </a></div>
-            <div id="item_Menu"><a href="index.php" title="Accueil"><img id="logo_BankUP" src="logo.png" onclick="location.href='index.php'"alt="Accueil" /></a></div>
+            <div class="blank"></i> </a></div>
+            <div><a href="index.php" title="Accueil"><img id="logo_BankUP" src="logo.png" onclick="location.href='index.php'"alt="Accueil" /></a></div>
             <div id="item_Menu"></div>
             <div id="item_Menu"></div>
             <?php if ($_SESSION['connecte']==1) { ?>
@@ -35,11 +35,11 @@
                 <div id="item_Menu"><button type="button" onclick="location.href='connexion.php'" title="Connexion" class="bouton_Connexion">CONNEXION</button></div>
                 <div id="item_Menu"><button type="button" onclick="location.href='inscription.php'" title="Inscription" class="bouton_Inscription">DEVENIR CLIENT</button></div>
            <?php } ?>
-                <div id="item_Menu"></div>
+                <div class="blank"></div>
         </nav>
     </header>
 
-    <body> <br />
+    <body>
         <button onclick="topFunction()" id="bouton_Haut" title="Haut de la page"><i class="fas fa-angle-up"></i></button>
         <script>
         // When the user scrolls the page, execute myFunction 

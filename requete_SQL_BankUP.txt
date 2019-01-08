@@ -36,9 +36,6 @@ CREATE TABLE conseiller
     FOREIGN KEY (agence_Conseiller) REFERENCES agence(id_Agence)
 )
 
-INSERT INTO `conseiller`(`nom_Conseiller`, `prenom_Conseiller`, `adresse_Mail_Conseiller`, `telephone_Conseiller`, `mdp_Conseiller`, `agence_Conseiller`)
-VALUES ('Tabourin','Francis','ftabourin@bankup.fr',0123456789,'743139240ff612253817440d98acb2ce7939fbb4',1);
-
 
 CREATE TABLE client
 (

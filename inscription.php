@@ -152,8 +152,15 @@
 
                 if ($conn->query($sql) === TRUE) { ?>
                     <div class="container">
-                        <h1>Votre profil a bien été créé.</h1>
-                        <p>Un mail vous a été envoyé à l'adresse renseignée.</p>
+  				  <table>
+                        <tbody><tr><td>
+        				<img id="ckeck_icon" src="check icon.png" style="width: 60px; margin-left: 30px; margin-right: 30px;">
+        				</td>
+                      	<td>
+                        <h1 style="font-variant: small-caps;">Votre profil a bien été créé.</h1>
+                      	</td>	
+    			  </tr></tbody></table>
+                        <p style="font-size: 15px; margin-left:130px; margin-top:0px;">Un mail vous a été envoyé à l'adresse renseignée.</p>
                         <hr>
                         <h2>Souhaitez-vous ouvrir un compte tout de suite ?</h2>
                         <div class="bouton_Form">
