@@ -243,16 +243,22 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <?php 
                 $i = 1;
-                echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</tr>");
+                echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</td><td>Supprimer</td></tr>");
                 while($beneficiaire = $resultat3->fetch_row()) {
                     if ($beneficiaire[3]==1) {
                         echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>Actif</td>"); ?>
                         <td><form method="post" action="virement.php">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Virement" value="<?php echo ($beneficiaire[0]) ?>">Faire virement</button><br /><br />
+                        </form></td>
+                        <td><form method="post" action="suppression_Beneficiaire.php">
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
                         </form></td></tr>
                     <?php } else {
-                        echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td>");
-                    }
+                        echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td><td></td>"); ?>
+                        <td><form method="post" action="suppression_Beneficiaire.php">
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
+                        </form></td></tr>
+                    <?php }
                     $i = $i + 1;
                 }
                 ?>
