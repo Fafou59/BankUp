@@ -18,24 +18,17 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    /*
+
     // Réaliser requête client
-    //$requete = $conn->prepare("SELECT client.*, agence.* FROM client, agence WHERE client.id_Client = '".$_SESSION['id']."' AND agence.id_Agence = client.id_Client");
-    $requete = $conn->prepare("SELECT client.* FROM client WHERE client.id_Client = '".$_SESSION['id']."'");
+    $requete = $conn->prepare("SELECT client.* FROM client WHERE client.agence_Client = '".$_SESSION['admin_Agence']."'");
     $requete->execute();
-    $resultat = $requete->get_result();
-    $client = $resultat->fetch_assoc();
+    $clients = $requete->get_result();
 
-    //Réaliser requête agence
-    $requete = $conn->prepare("SELECT agence.* FROM agence, client WHERE client.agence_Client = agence.id_Agence");
-    $requete->execute();
-    $resultat = $requete->get_result();
-    $agence = $resultat->fetch_assoc();
-
+    /*
     // Réaliser requête compte
     $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_SESSION['id']."' = compte.id_Detenteur_Compte");
     $requete->execute();
-    $resultat = $requete->get_result();
+    $cheques = $requete->get_result();
 
     // Réaliser requête bénéficiaires
     $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE '".$_SESSION['id']."' = beneficiaire.id_Client_Emetteur");
@@ -57,114 +50,38 @@
 
     <body>
         <div id="contenu">
-            <button class="lienEC" onclick="openPage('informations', this, '#E80969')" id="defaultOpen">Vos informations</button>
-            <button class="lienEC" onclick="openPage('comptes', this, '#E80969')" >Vos comptes</button>
+            <button class="lienEC" onclick="openPage('clients', this, '#E80969')" id="defaultOpen">Liste des clients</button>
+            <button class="lienEC" onclick="openPage('cheques', this, '#E80969')" >Chèques à valider</button>
             <button class="lienEC" onclick="openPage('operations', this, '#E80969')">Vos opérations</button>
             <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')">Vos bénéficiaires</button>
 
-            <div id="informations" class="item_EC">
-                <h1>Vos informations</h1>
-                <p>Vous pouvez modifier vos informations. N'oubliez pas de valider.</p>
-                <form method="post" action="modif_Infos.php" style="border:1px solid #ccc">
-                    <div class="container">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><label for="civilite">Civilité</label> :</td>
-                                <td id="civilite">
-                                    <input type="radio" name="civilite" value="madame" id="madame" <?php if ($client['civilite_Client']=='F') {echo "checked='checked'";}  ?> />
-                                    <label for="madame">Mme</label>
-                                    <input type="radio" name="civilite" value="monsieur" id="monsieur"  <?php if ($client['civilite_Client']=='H') {echo "checked='checked'";}  ?>  />
-                                    <label for="monsieur">M.</label>
-                                </td> 
-                            </tr>
-                            <tr>   
-                                <td><label for="nom">Nom</label> :</td>
-                                <td><input type="text" name="nom" id="nom" size="20" minlength="2" maxlength="25" value="<?php echo ($client['nom_Client']) ?>" /></td>   
-                            </tr>
-                            <tr>
-                                <td><label for="prenom">Prénom</label> :</td>
-                                <td><input type="text" name="prenom" id="prenom" size="20" minlength="2" maxlength="25" value="<?php echo ($client['prenom_Client']) ?>" /></td>
-                            </tr>
-                            <tr>
-                                <td><label for="date_Naissance">Date de naissance</label> :</td>
-                                <td><input type="date" name="date_Naissance" id="date_Naissance" value="<?php echo ($client['date_Naissance_Client']) ?>" /></td>
-                            </tr>
-                            <tr>
-                                <td><label for="pays">Pays :</label></td>
-                                <td><select name="pays" id="pays" required>
-                                <?php
-                                            $id_fichier= fopen("liste_pays.txt","r");
-                                            while($ligne=fgets($id_fichier,1024))
-                                            {
-                                                $ligne=explode(chr(9),$ligne);
-                                                if ($ligne[1]=='France') // France est sélectionné par défaut
-                                                print '<option value='.$ligne[0].' selected="selected">'.$ligne[1].'</option>';
-                                                else
-                                                print '<option value='.$ligne[0].'>'.$ligne[1].'</option>';
-                                            }
-                                        ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>Adresse postale</label> :</td>
-                                <td>
-                                    <label for="numero_Voie">N° de voie</label> :
-                                    <input type="text" name="numero_Voie" id="numero_Voie" size="5" minlength="0" maxlength="5" placeholder="Entrez votre n° voie" value="<?php echo ($client['num_Voie_Client']) ?>"  />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <label for="voie">Voie</label> :
-                                    <input type="text" name="voie" id="voie" size="75" minlength="" maxlength="75" placeholder="Entrez votre voie" value="<?php echo ($client['voie_Client']) ?>" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>    
-                                    <label for="code_Postal">Code postal</label> :
-                                    <input type="text" name="code_Postal" id="code_Postal" size="5" minlength="5" maxlength="5" placeholder="Entrez votre code postal" value="<?php echo ($client['code_Postal_Client']) ?>" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <label for="ville">Ville</label> :
-                                    <input type="text" name="ville" id="ville" size="10" minlength="5" maxlength="25" placeholder="Entrez votre ville" value="<?php echo ($client['ville_Client']) ?>" />
-                                </td>
-                            </tr>
-
-                            </tr>
-                            <tr>
-                                <td><label for="email">Adresse mail</label> :</td>
-                                <td><input type="email" name="email" id="email" size="50" minlength="5" maxlength="70" placeholder="Entrez votre adresse mail" value="<?php echo ($client['adresse_Mail_Client']) ?>" /></td>
-                            </tr>
-                            <tr>
-                                <td><label for="telephone">Téléphone</label> :</td>
-                                <td><input type="text" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" value="<?php echo ($client['telephone_Client']) ?>" /></td>
-                            </tr>
-                            <tr>
-                                <td><label for="mdp">Mot de passe</label> :</td>
-                                <td><input type="password" name="mdp" id="mdp" size="30" minlength="" maxlength="30" placeholder="Entrez votre mot de passe" /></td>
-                            </tr>
-                        </table><br />
-                        <div class="bouton_Form">
-                            <button type="submit" class="bouton_Valider">Modifier</button>
-                            <button type="button" class="bouton_Annuler">Annuler</button>
-                        </div>
-                    </div>
-                </form>
-                <br /><hr>
-                <h2>Votre agence</h2>
-                <div>
-                    <?php echo("BankUP ".$agence['ville_Agence']."<br />".$agence['num_Voie_Agence']." ".$agence['voie_Agence']."<br />".$agence['code_Postal_Agence']." ".$agence['ville_Agence']."<br />"); ?>
+            <div id="clients" class="item_EC">
+                <h1>Les clients de votre agence</h1>
+                <p>
+                    Tous les clients de votre agence sont affichés ci-dessous.<br />
+                    Vous pouvez également créer un nouveau client.
+                    <hr>
+                </p>
+                <div class="container">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <?php 
+                        $i = 1;
+                        echo("<tr><td>N°</td><td>Prénom</td><td>Nom</td><td>Adresse mail</td><td>Accéder au profil</td></tr>");
+                        while($client = $clients->fetch_row()) {
+                            echo("<tr><td>".$i."</td><td>".$client[3]."</td><td>".$client[2]."</td><td>".$client[6]."</td>"); ?>
+                            <td><form method="post" action="mirroring_Admin.php">
+                                <button name="id_Client" type="submit" class="bouton_Profil" value="<?php echo ($client[0]) ?>">Profil</button><br /><br />
+                            </form></td></tr>
+                            <?php
+                            $i = $i + 1;
+                        }
+                    ?>
+                    </table>
                 </div>
-            </div>
 
-            <div id="comptes" class="item_EC">
-                <h1>Vos comptes</h1>
-                <p>Vous pouvez consulter ci-dessous vos comptes.<br />Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
+            <div id="cheques" class="item_EC">
+                <h1>Les chèques à valider</h1>
+                <p>Vous pouvez consulter ci-dessous les chèques en attente de validation.</p>
                 <hr>
                 <?php 
                     $i = 1;
@@ -261,6 +178,7 @@
                         $i = $i + 1;
                     }
                     ?>
+                    </table>
                 </p>
             </div>
         </div>

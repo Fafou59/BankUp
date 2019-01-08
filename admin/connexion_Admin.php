@@ -35,7 +35,7 @@
             die("Connection failed: " . $conn->connect_error);
         }
         // Réaliser requête
-        $requete = $conn->prepare("SELECT id_Conseiller, adresse_Mail_Conseiller, mdp_Conseiller FROM conseiller WHERE adresse_Mail_Conseiller = '".$identifiant."'");
+        $requete = $conn->prepare("SELECT id_Conseiller, adresse_Mail_Conseiller, mdp_Conseiller, agence_Conseiller FROM conseiller WHERE adresse_Mail_Conseiller = '".$identifiant."'");
         $requete->execute();
         $resultat = $requete->get_result();
         $conseiller = $resultat->fetch_assoc();
@@ -45,6 +45,7 @@
             $_SESSION['admin_Identifiant'] = $identifiant;
             $_SESSION['admin_Id'] = $conseiller['id_Conseiller'];
             $_SESSION['admin_Agence'] = $conseiller['agence_Conseiller'];
+            echo($_SESSION['admin_Agence']);
             header("Location: espace_Admin.php");
         }
         else { ?>

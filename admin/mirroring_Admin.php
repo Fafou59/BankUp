@@ -7,11 +7,12 @@
         header("Location: connexion_Admin.php");
     }
 
-    //A retirer après
-    $_SESSION['id_Client'] = 1;
-
-    if (!isset($_SESSION['id_Client'])) {
-        header("Location: espace_Admin.php");
+    if (!isset($_POST['id_Client'])) {
+        if (!isset($_SESSION['id_Client_Admin'])) {
+            header("Location: espace_Admin.php");
+        }
+    } else {
+        $_SESSION['id_Client_Admin'] = $_POST['id_Client'];
     }
 
     $servername = "localhost";
@@ -26,8 +27,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Réaliser requête client
-    //$requete = $conn->prepare("SELECT client.*, agence.* FROM client, agence WHERE client.id_Client = '".$_SESSION['id']."' AND agence.id_Agence = client.id_Client");
-    $requete = $conn->prepare("SELECT client.* FROM client WHERE client.id_Client = '".$_SESSION['id_Client']."'");
+    $requete = $conn->prepare("SELECT client.* FROM client WHERE client.id_Client = '".$_SESSION['id_Client_Admin']."'");
     $requete->execute();
     $resultat = $requete->get_result();
     $client = $resultat->fetch_assoc();
@@ -39,12 +39,12 @@
     $agence = $resultat->fetch_assoc();
 
     // Réaliser requête compte
-    $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_SESSION['id_Client']."' = compte.id_Detenteur_Compte");
+    $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_SESSION['id_Client_Admin']."' = compte.id_Detenteur_Compte ORDER BY id_Compte ASC");
     $requete->execute();
     $resultat = $requete->get_result();
 
     // Réaliser requête bénéficiaires
-    $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE '".$_SESSION['id_Client']."' = beneficiaire.id_Client_Emetteur");
+    $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE beneficiaire.id_Client_Emetteur = '".$_SESSION['id_Client_Admin']."' ORDER BY libelle_Beneficiaire ASC");
     $requete3->execute();
     $resultat3 = $requete3->get_result();
     
@@ -57,7 +57,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="code.css" />
         <script type="text/javascript" src="menu_EC.jsx"></script>
-        <title>ADMIN BankUP - Espace Admin</title>
+        <title>ADMIN BankUP - <?php echo($client['prenom_Client']." ".strtoupper($client['nom_Client'])); ?></title>
     </head>
 
 
@@ -70,7 +70,7 @@
 
             <div id="informations" class="item_EC">
                 <h1>Les informations de <?php echo($client['prenom_Client']." ".strtoupper($client['nom_Client'])); ?></h1>
-                <p>Vous pouvez modifier vos informations. N'oubliez pas de valider.</p>
+                <p>Vous pouvez modifier les informations de ce client. N'oubliez pas de valider.</p>
                 <form method="post" action="modif_Infos.php" style="border:1px solid #ccc">
                     <div class="container">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -169,8 +169,8 @@
             </div>
 
             <div id="comptes" class="item_EC">
-                <h1>Vos comptes</h1>
-                <p>Vous pouvez consulter ci-dessous vos comptes.<br />Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
+                <h1>Les comptes de <?php echo($client['prenom_Client']." ".strtoupper($client['nom_Client'])); ?></h1>
+                <p>Vous pouvez consulter ci-dessous les comptes de ce client.<br />Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
                 <hr>
                 <?php 
                     $i = 1;
@@ -215,7 +215,7 @@
                         $i = $i + 1;
                     }
                 ?>
-                <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'">Ouvrir un compte</button><br /><br />
+                <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte_Admin.php'">Ouvrir un compte</button><br /><br />
             </div>
 
             <div id="operations" class="item_EC">

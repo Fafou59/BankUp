@@ -22,7 +22,7 @@
         $sql2 = "INSERT INTO chequier (id_Compte_Rattache, date_Emission_Chequier, validite_Chequier) VALUES ('".$_POST['id_Compte']."', NOW(), 1)";
         if ($conn->query($sql1) === TRUE) {
             if ($conn->query($sql2) === TRUE) {
-                header('Location: espace_Client.php');
+                header('Location: mirroring_Admin.php');
             } else {
                 echo "Error: " . $sql2 . "<br>" . $conn->error;
             }
@@ -33,7 +33,7 @@
         $sql = "INSERT INTO chequier (id_Compte_Rattache, date_Emission_Chequier, validite_Chequier)
         VALUES ('".$_POST['id_Compte']."', NOW(), 1)";
         if ($conn->query($sql) === TRUE) {
-            header('Location: espace_Client.php');
+            header('Location: mirroring_Admin.php');
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

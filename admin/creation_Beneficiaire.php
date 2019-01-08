@@ -1,8 +1,8 @@
 <?php
-    include('menu.php');
+    include('menu_Admin.php');
     $libelle_Beneficiaire = $_POST['libelle_Beneficiaire'];
     $iban = $_POST['iban'];
-    $id_Emetteur = $_SESSION['id'];
+    $id_Emetteur = $_SESSION['id_Client_Admin'];
 
     $servername = "localhost";
     $username = "root";
@@ -27,14 +27,14 @@
     $beneficiaire = $resultat->fetch_assoc();
 
     if (($beneficiaire['id_Compte_Beneficiaire']==$compte['id_Compte']) AND ($beneficiaire['id_Client_Emetteur']==$id_Emetteur)) {
-        header('Location: espace_Client.php');
+        header('Location: mirroring_Admin.php');
     } else {    
         // Réaliser requête
         $sql = "INSERT INTO beneficiaire (id_Compte_Beneficiaire, id_Client_Emetteur, libelle_Beneficiaire, validite_Beneficiaire)
-        VALUES ('".$compte['id_Compte']."', '".$id_Emetteur."', '".$libelle_Beneficiaire."', 0)";
+        VALUES ('".$compte['id_Compte']."', '".$id_Emetteur."', '".$libelle_Beneficiaire."', 1)";
         
         if ($conn->query($sql) === TRUE) {
-            header('Location: espace_Client.php');
+            header('Location: mirroring_Admin.php');
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

@@ -25,7 +25,7 @@
     <header>
         <nav>
             <div id="item_Menu"></i> </a></div>
-            <div id="item_Menu"><a href="index.php" title="Accueil"><img id="logo_BankUP" src="logo.png" onclick="location.href='connexion_Admin.php'"alt="Accueil" /></a></div>
+            <div id="item_Menu"><a href="index.php" title="Accueil"><img id="logo_BankUP" src="logo2.png" onclick="location.href='connexion_Admin.php'"alt="Accueil" /></a></div>
             <div id="item_Menu"></div>
             <div id="item_Menu"></div>
             <?php if ($_SESSION['admin_Connecte']==1) { ?>
@@ -40,7 +40,7 @@
     </header>
 
     <body> <br />
-        <button onclick="topFunction()" id="bouton_Haut" title="Haut de la page"><i class="fas fa-angle-up"></i></button>
+        <button onclick="topFunction()" id="bouton_Haut" title="Haut de la page">H</button>
         <script>
         // When the user scrolls the page, execute myFunction 
         window.onscroll = function() {myFunction()};

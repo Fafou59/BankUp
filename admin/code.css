@@ -19,14 +19,14 @@ Vert de bouton #4caf50
 
 /* Image de fond */
 body {
-  background-color: #555;
+  background: url('monde.jpg') no-repeat center fixed;
 }
 
 /* Mise en forme de la barre de menu */
 nav {
     width: 100%;
     height:10% ;
-    background-color: #0DDBD8 ;
+    background-color: #555 ;
     display: flex ;
     color: white;
 }
@@ -66,7 +66,7 @@ nav {
   font-size: 80%;
   color: white;
   font-weight: bold;
-  background-color: #555;
+  background-color: #0DDBD8;
   box-shadow: 0 2px 0 0 #555;
   margin-right: 15px;
   margin-bottom: 8px;
@@ -81,6 +81,9 @@ nav {
   opacity: 1;
 }
 
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
 
 
 /* Mise en forme des formulaires */
