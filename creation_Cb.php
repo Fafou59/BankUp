@@ -18,7 +18,7 @@
     VALUES ('".$_POST['id_Compte']."', '".$num_Cb."', '".$cryptogramme."', DATE_ADD(NOW(),INTERVAL 5 YEAR))";
     
     if ($conn->query($sql) === TRUE) {
-        header('Location: espace_Client.php');
+        header('Location: mirroring_Admin.php');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
