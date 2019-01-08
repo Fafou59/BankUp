@@ -23,18 +23,6 @@
     $requete = $conn->prepare("SELECT client.* FROM client WHERE client.agence_Client = '".$_SESSION['admin_Agence']."'");
     $requete->execute();
     $clients = $requete->get_result();
-
-    /*
-    // Réaliser requête compte
-    $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_SESSION['id']."' = compte.id_Detenteur_Compte");
-    $requete->execute();
-    $cheques = $requete->get_result();
-
-    // Réaliser requête bénéficiaires
-    $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE '".$_SESSION['id']."' = beneficiaire.id_Client_Emetteur");
-    $requete3->execute();
-    $resultat3 = $requete3->get_result();
-    */
 ?>
 
 <!DOCTYPE HTML>
@@ -60,6 +48,7 @@
                 <p>
                     Tous les clients de votre agence sont affichés ci-dessous.<br />
                     Vous pouvez également créer un nouveau client.
+                    <button type="submit" class="bouton_Valider" onclick="location.href='inscription_Admin.php'">Créer un client</button>
                     <hr>
                 </p>
                 <div class="container">

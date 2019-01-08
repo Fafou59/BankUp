@@ -1,4 +1,8 @@
 <?php
+    if (!isset($_POST['id_Compte'])) {
+        header('Location: mirroring_Admin.php');
+    }
+
     $num_Cb = trim(rand(10000000,99999999)).trim(rand(10000000,99999999));
     $cryptogramme = rand(100,999);
 
@@ -18,7 +22,7 @@
     VALUES ('".$_POST['id_Compte']."', '".$num_Cb."', '".$cryptogramme."', DATE_ADD(NOW(),INTERVAL 5 YEAR))";
     
     if ($conn->query($sql) === TRUE) {
-        header('Location: espace_Client.php');
+        header('Location: mirroring_Admin.php');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

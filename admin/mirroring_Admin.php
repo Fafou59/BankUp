@@ -63,10 +63,10 @@
 
     <body>
         <div id="contenu">
-            <button class="lienEC" onclick="openPage('informations', this, '#E80969')" id="defaultOpen">Vos informations</button>
-            <button class="lienEC" onclick="openPage('comptes', this, '#E80969')" >Vos comptes</button>
-            <button class="lienEC" onclick="openPage('operations', this, '#E80969')">Vos opérations</button>
-            <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')">Vos bénéficiaires</button>
+            <button class="lienEC" onclick="openPage('informations', this, '#E80969')" id="defaultOpen">Informations</button>
+            <button class="lienEC" onclick="openPage('comptes', this, '#E80969')" >Comptes</button>
+            <button class="lienEC" onclick="openPage('operations', this, '#E80969')">Opérations</button>
+            <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')">Bénéficiaires</button>
 
             <div id="informations" class="item_EC">
                 <h1>Les informations de <?php echo($client['prenom_Client']." ".strtoupper($client['nom_Client'])); ?></h1>
@@ -162,7 +162,7 @@
                     </div>
                 </form>
                 <br /><hr>
-                <h2>Votre agence</h2>
+                <h2>L'agence</h2>
                 <div>
                     <?php echo("BankUP ".$agence['ville_Agence']."<br />".$agence['num_Voie_Agence']." ".$agence['voie_Agence']."<br />".$agence['code_Postal_Agence']." ".$agence['ville_Agence']."<br />"); ?>
                 </div>
@@ -219,14 +219,14 @@
             </div>
 
             <div id="operations" class="item_EC">
-                <h1>Vos opérations</h1>
+                <h1>Les opérations de <?php echo($client['prenom_Client']." ".strtoupper($client['nom_Client'])); ?></h1>
                 <p>Liste des opérations passées + lien vers formulaire virement</p>
             </div>
 
             <div id="beneficiaires" class="item_EC">
-                <h1>Vos bénéficiaires</h1>
+                <h1>Les bénéficiaires de <?php echo($client['prenom_Client']." ".strtoupper($client['nom_Client'])); ?></h1>
                 <p>
-                    Vous trouverez ci-dessous la liste de vos bénéficiaires.<br />
+                    Vous trouverez ci-dessous la liste des bénéficiaires de ce client.<br />
                     Vous pouvez ajouter un bénéficiaire avec le formulaire ci-dessous, et supprimer les bénéficiaires déjà enregistrés.
                 </p>
                 <hr>
@@ -254,16 +254,22 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <?php 
                     $i = 1;
-                    echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</tr>");
+                    echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</td><td>Supprimer</td></tr>");
                     while($beneficiaire = $resultat3->fetch_row()) {
                         if ($beneficiaire[3]==1) {
                             echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>Actif</td>"); ?>
                             <td><form method="post" action="virement.php">
-                                <button name="id_Beneficiaire" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
+                                <button name="id_Beneficiaire" type="submit" class="bouton_Virement" value="<?php echo ($beneficiaire[0]) ?>">Faire virement</button><br /><br />
+                            </form></td>
+                            <td><form method="post" action="suppression_Beneficiaire.php">
+                                <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
                             </form></td></tr>
                         <?php } else {
-                            echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td>");
-                        }
+                            echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td><td></td>"); ?>
+                            <td><form method="post" action="suppression_Beneficiaire.php">
+                                <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
+                            </form></td></tr>
+                        <?php }
                         $i = $i + 1;
                     }
                     ?>
