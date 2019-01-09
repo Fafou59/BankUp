@@ -54,7 +54,7 @@
             <div class="lienEC" style="width: 14%"> </div> 
             <button class="lienEC" onclick="openPage('informations', this, '#f1f1f1')" style="width: 18%" id="defaultOpen">vos informations</button>
             <button class="lienEC" onclick="openPage('comptes', this, '#f1f1f1')"style="width: 18%" >vos comptes</button>
-            <button class="lienEC" onclick="openPage('virement', this, '#f1f1f1')" style="width: 18%">faire un virement</button>
+            <button class="lienEC" onclick="openPage('operations', this, '#f1f1f1')" style="width: 18%">vos opérations</button>
             <button class="lienEC" onclick="openPage('beneficiaires', this, '#f1f1f1')" style="width: 18%" >vos bénéficiaires</button>
             <div class="lienEC" style="width: 14%"> </div>
         </div>
@@ -70,40 +70,31 @@
                         <tr>
                             <td><label for="civilite">civilité</label> :</td>
                             <td id="civilite">
-                                <input type="radio" name="civilite" value="madame" id="madame" <?php if ($client['civilite_Client']=='F') {echo "checked='checked'";}  ?> />
-                                <label for="madame">mme</label>
-                                <input type="radio" name="civilite" value="monsieur" id="monsieur"  <?php if ($client['civilite_Client']=='H') {echo "checked='checked'";}  ?>  />
-                                <label for="monsieur">m.</label>
+                                <label>
+                                    <?php if ($client['civilite_Client']=='F') 
+                                        {echo ("mme");
+                                    } else {
+                                        echo ("m.");
+                                    }  
+                                    ?>
+                                </label>
                             </td> 
                         </tr>
                         <tr>   
                             <td><label for="nom">nom</label> :</td>
-                            <td><input type="text" name="nom" id="nom" size="20" minlength="2" maxlength="25" value="<?php echo ($client['nom_Client']) ?>" /></td>   
+                            <td id="infos"><?php echo ($client['nom_Client']) ?></td>   
                         </tr>
                         <tr>
                             <td><label for="prenom">prénom</label> :</td>
-                            <td><input type="text" name="prenom" id="prenom" size="20" minlength="2" maxlength="25" value="<?php echo ($client['prenom_Client']) ?>" /></td>
+                            <td id="infos"><?php echo ($client['prenom_Client']) ?></td>
                         </tr>
                         <tr>
                             <td><label for="date_Naissance">date de naissance</label> :</td>
-                            <td><input type="date" name="date_Naissance" id="date_Naissance" value="<?php echo ($client['date_Naissance_Client']) ?>" /></td>
+                            <td id="infos"><?php echo ($client['date_Naissance_Client']) ?></td>
                         </tr>
                         <tr>
-                            <td><label for="pays">pays :</label></td>
-                            <td><select name="pays" id="pays" required>
-                            <?php
-                                        $id_fichier= fopen("liste_pays.txt","r");
-                                        while($ligne=fgets($id_fichier,1024))
-                                        {
-                                            $ligne=explode(chr(9),$ligne);
-                                            if ($ligne[1]=='France') // France est sélectionné par défaut
-                                            print '<option value='.$ligne[0].' selected="selected">'.$ligne[1].'</option>';
-                                            else
-                                            print '<option value='.$ligne[0].'>'.$ligne[1].'</option>';
-                                        }
-                                    ?>
-                                </select>
-                            </td>
+                            <td><label for="pays">nationalité :</label></td>
+                            <td id="infos"><?php echo($client['pays_Client']) ?></td>
                         </tr>
                         <tr>
                             <td><label>adresse postale</label> :</td>
@@ -142,10 +133,6 @@
                         <tr>
                             <td><label for="telephone">téléphone</label> :</td>
                             <td><input type="text" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" value="<?php echo ($client['telephone_Client']) ?>" /></td>
-                        </tr>
-                        <tr>
-                            <td><label for="mdp">mot de passe</label> :</td>
-                            <td><input type="password" name="mdp" id="mdp" size="30" minlength="" maxlength="30" placeholder="Entrez votre mot de passe" /></td>
                         </tr>
                     </table><br />
                 </form>
@@ -201,7 +188,7 @@
                             </form>
                         <?php }
                         //Chéquier
-                        $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$compte[0]);
+                        $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$compte[0]." AND validite_Chequier = 1");
                         $requete->execute();
                         $resultat2 = $requete->get_result();
                         $chequier = $resultat2->fetch_assoc();
@@ -241,7 +228,7 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td><label for="libelle_Beneficiaire">Libellé du bénéficiaire</label> :</td>
-                            <td><input type="text" name="libelle_Beneficiaire" id="libelle_Beneficiaire" size="20" minlength="2" maxlength="25" placeholder="Entrez le libellé du bénéficiaire" required /></td>
+                            <td><input type="text" name="libelle_Beneficiaire" id="libelle_Beneficiaire" size="30" minlength="2" maxlength="30" placeholder="Entrez le libellé du bénéficiaire" required /></td>
                         </tr>
                         <tr>   
                             <td><label for="iban">IBAN</label> :</td>
@@ -258,16 +245,22 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <?php 
                 $i = 1;
-                echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</tr>");
+                echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</td><td>Supprimer</td></tr>");
                 while($beneficiaire = $resultat3->fetch_row()) {
                     if ($beneficiaire[3]==1) {
                         echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>Actif</td>"); ?>
                         <td><form method="post" action="virement.php">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Virement" value="<?php echo ($beneficiaire[0]) ?>">Faire virement</button><br /><br />
+                        </form></td>
+                        <td><form method="post" action="suppression_Beneficiaire.php">
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
                         </form></td></tr>
                     <?php } else {
-                        echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td>");
-                    }
+                        echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td><td></td>"); ?>
+                        <td><form method="post" action="suppression_Beneficiaire.php">
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
+                        </form></td></tr>
+                    <?php }
                     $i = $i + 1;
                 }
                 ?>

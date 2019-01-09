@@ -62,22 +62,28 @@
                 }
                 $bic = "BKUPFRPP";
                 $autorisation_Decouvert = 100;
+
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
                 $dbname = "bankup";
+
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
+
                 $sql = "INSERT INTO compte (date_Ouverture_Compte, type_Compte, solde_Compte, libelle_Compte, iban_Compte, bic_Compte, autorisation_Decouvert_Compte, id_Detenteur_Compte)
                 VALUES ('".$date."', '".$type_Compte."', '".$solde_Compte."', '".$libelle_Compte."', '".$iban."', '".$bic."', '".$autorisation_Decouvert."', '".$_SESSION["id"]."')";
+
                 if ($conn->query($sql) === TRUE) { ?>
                     <div class="container">
                         <h1>Votre compte a bien été créé.</h1>
-                        <p>Vous avez bénéficié de notre offre d'accueil de 1000€ ! Ils ont bien été ajoutés à votre compte..</p>
+                        <?php if ($type_Compte == "courant") { ?>
+                            <p>Vous avez bénéficié de notre offre d'accueil de 1000€ ! Ils ont bien été ajoutés à votre compte..</p>
+                        <?php } ?>
                         <hr>
                         <div class="bouton_Form">
                             <button type="submit" class="bouton_Valider" onclick="location.href='espace_Client.php'">Aller sur votre espace client</button>

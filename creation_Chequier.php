@@ -14,8 +14,8 @@
     // Recherche d'un chéquier rattaché
     $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$_POST['id_Compte']);
     $requete->execute();
-    $resultat2 = $requete->get_result();
-    $chequier = $resultat2->fetch_assoc();
+    $resultat = $requete->get_result();
+    $chequier = $resultat->fetch_assoc();
 
     if (isset($chequier)) {
         $sql1 = "UPDATE chequier SET validite_Chequier = 0 WHERE chequier.id_Compte_Rattache = ".$_POST['id_Compte'];

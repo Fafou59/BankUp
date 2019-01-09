@@ -43,7 +43,7 @@
                             <td><input type="date" name="date_Naissance" id="date_Naissance" required /></td>
                         </tr>
                         <tr>
-                            <td><label for="pays">Pays :</label></td>
+                            <td><label for="pays">Natonalité :</label></td>
                             <td><select name="pays" id="pays" required>
                             <?php
                                         $id_fichier= fopen("liste_pays.txt","r");
@@ -162,10 +162,9 @@
     			  </tr></tbody></table>
                         <p style="font-size: 15px; margin-left:130px; margin-top:0px;">Un mail vous a été envoyé à l'adresse renseignée.</p>
                         <hr>
-                        <h2>Souhaitez-vous ouvrir un compte tout de suite ?</h2>
+                        <h2>Connectez-vous pour continuer votre expérience !</h2>
                         <div class="bouton_Form">
                             <button type="button" class="bouton_Annuler" onclick="location.href='espace_Client.php'">Aller sur Espace Client</button>
-                            <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'">Valider</button>
                         </div>
                     </div> <?php
                 } else {
