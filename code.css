@@ -13,8 +13,8 @@ Vert de bouton #4caf50
 
 .h1 {
 font-variant: small-caps;
-color: #555;
 }
+
 
 /* Mise en forme contenu de base (sans formulaire) */
 #contenu {
@@ -99,9 +99,6 @@ margin-bottom: 4px;
     background-color: white;
 }
 
-label {
-  font-weight: bold;
-}
 
 input[type=text], input[type=password], input[type=date], input[type=email], #pays, #civilite, #type_Compte {
   width: 95%;
@@ -226,7 +223,7 @@ background-color: rgba(103,103,97);
   font-variant: small-caps;
 }
 
-.item_EC {
+div#informations.item_EC {
   display: none;
   padding: 10px 20px;
   height: 100%;
@@ -236,6 +233,11 @@ background-color: rgba(103,103,97);
   margin-top: 100px; 
   align-content: center;
 }
+div#informations.item_EC label {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 20px;
+  }
 
 /* Mise en forme des slideshows*/
 * {box-sizing: border-box}
@@ -247,6 +249,7 @@ img {vertical-align: middle;}
 .slideshow-container {
   position: relative;
   margin: auto;
+  margin-top: 50px;
 }
 
 /* Next & previous buttons */
@@ -407,6 +410,68 @@ input[type=textsearch]:focus {
 }
 
 /*input[type="textsearch"]::placeholder{color: red;}*/
+
+div#comptes.item_EC {
+display: none;
+padding: 10px 20px;
+height: 200%;
+background-color: white;
+margin-left:10%; 
+margin-right:10%; 
+margin-top: 100px;
+margin-bottom: 50px; 
+align-content: center;
+}
+
+  
+  
+
+div#comptes.item_EC td {
+  padding-right:100px;
+  border-bottom: 1px solid #ddd;
+  padding-left:10px;
+}
+div#comptes.item_EC tr {
+height: 2px;
+}
+
+div#comptes.item_EC table {
+  margin-top:30px;
+  border: 1px solid #ddd;
+  margin-bottom:100px;
+  }
+
+div#comptes.item_EC h3 {
+  font-variant: small-caps;
+  }
+
+
+
+  div#comptes.item_EC button {
+    margin-top:0px;
+    border-radius: 0px;
+    width: 180px;
+    height: 50px;
+    font-size:90%; 
+    float:left; 
+    font-variant: small-caps;
+    }
+    
+  div#informations.item_EC table {
+    margin-top:100px;
+  }
+
+  div#informations.item_EC button {
+    margin-top:0px;
+    border-radius: 0px;
+    width: 180px;
+    height: 50px;
+    font-size:90%; 
+    float:left; 
+    font-variant: small-caps;
+    }
+
+
 
 
 

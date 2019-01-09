@@ -65,30 +65,31 @@
                     <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos informations</h1>
                     <p style="font-size: 15px">Vous pouvez modifier vos informations. N'oubliez pas de valider.</p>
                     <hr>
+                    <button type="submit" class="bouton_Valider"><img src="pencil.png" style="width:25px; margin-right:20px;">Modifier</button>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td><label for="civilite">Civilité</label> :</td>
+                            <td><label for="civilite">civilité</label> :</td>
                             <td id="civilite">
                                 <input type="radio" name="civilite" value="madame" id="madame" <?php if ($client['civilite_Client']=='F') {echo "checked='checked'";}  ?> />
-                                <label for="madame">Mme</label>
+                                <label for="madame">mme</label>
                                 <input type="radio" name="civilite" value="monsieur" id="monsieur"  <?php if ($client['civilite_Client']=='H') {echo "checked='checked'";}  ?>  />
-                                <label for="monsieur">M.</label>
+                                <label for="monsieur">m.</label>
                             </td> 
                         </tr>
                         <tr>   
-                            <td><label for="nom">Nom</label> :</td>
+                            <td><label for="nom">nom</label> :</td>
                             <td><input type="text" name="nom" id="nom" size="20" minlength="2" maxlength="25" value="<?php echo ($client['nom_Client']) ?>" /></td>   
                         </tr>
                         <tr>
-                            <td><label for="prenom">Prénom</label> :</td>
+                            <td><label for="prenom">prénom</label> :</td>
                             <td><input type="text" name="prenom" id="prenom" size="20" minlength="2" maxlength="25" value="<?php echo ($client['prenom_Client']) ?>" /></td>
                         </tr>
                         <tr>
-                            <td><label for="date_Naissance">Date de naissance</label> :</td>
+                            <td><label for="date_Naissance">date de naissance</label> :</td>
                             <td><input type="date" name="date_Naissance" id="date_Naissance" value="<?php echo ($client['date_Naissance_Client']) ?>" /></td>
                         </tr>
                         <tr>
-                            <td><label for="pays">Pays :</label></td>
+                            <td><label for="pays">pays :</label></td>
                             <td><select name="pays" id="pays" required>
                             <?php
                                         $id_fichier= fopen("liste_pays.txt","r");
@@ -105,52 +106,48 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Adresse postale</label> :</td>
+                            <td><label>adresse postale</label> :</td>
                             <td>
-                                <label for="numero_Voie">N° de voie</label> :
+                                <label for="numero_Voie">n° de voie</label> :
                                 <input type="text" name="numero_Voie" id="numero_Voie" size="5" minlength="0" maxlength="5" placeholder="Entrez votre n° voie" value="<?php echo ($client['num_Voie_Client']) ?>"  />
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
-                                <label for="voie">Voie</label> :
+                                <label for="voie">voie</label> :
                                 <input type="text" name="voie" id="voie" size="75" minlength="" maxlength="75" placeholder="Entrez votre voie" value="<?php echo ($client['voie_Client']) ?>" />
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td> 
-                                <label for="code_Postal">Code postal</label> :
+                                <label for="code_Postal">code postal</label> :
                                 <input type="text" name="code_Postal" id="code_Postal" size="5" minlength="5" maxlength="5" placeholder="Entrez votre code postal" value="<?php echo ($client['code_Postal_Client']) ?>" />
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
-                                <label for="ville">Ville</label> :
+                                <label for="ville">ville</label> :
                                 <input type="text" name="ville" id="ville" size="10" minlength="5" maxlength="25" placeholder="Entrez votre ville" value="<?php echo ($client['ville_Client']) ?>" />
                             </td>
                         </tr>
 
                         </tr>
                         <tr>
-                            <td><label for="email">Adresse mail</label> :</td>
+                            <td><label for="email">adresse mail</label> :</td>
                             <td><input type="email" name="email" id="email" size="50" minlength="5" maxlength="70" placeholder="Entrez votre adresse mail" value="<?php echo ($client['adresse_Mail_Client']) ?>" /></td>
                         </tr>
                         <tr>
-                            <td><label for="telephone">Téléphone</label> :</td>
+                            <td><label for="telephone">téléphone</label> :</td>
                             <td><input type="text" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" value="<?php echo ($client['telephone_Client']) ?>" /></td>
                         </tr>
                         <tr>
-                            <td><label for="mdp">Mot de passe</label> :</td>
+                            <td><label for="mdp">mot de passe</label> :</td>
                             <td><input type="password" name="mdp" id="mdp" size="30" minlength="" maxlength="30" placeholder="Entrez votre mot de passe" /></td>
                         </tr>
                     </table><br />
-                    <div class="bouton_Form">
-                        <button type="submit" class="bouton_Valider">Modifier</button>
-                        <button type="button" class="bouton_Annuler">Annuler</button>
-                    </div>
                 </form>
                 <br /><hr>
                 <h2>Votre agence</h2>
@@ -164,11 +161,31 @@
             <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos comptes</h1>
             <p style="font-size: 15px">Vous pouvez consulter ci-dessous vos comptes. Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
             <hr>
+            <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Ouvrir un compte</button><br /><br />
             <?php 
                 $i = 1;
-                while($compte = $resultat->fetch_row()) {
-                    echo("<p><h3>Compte ".$i." :</h3><b>Libellé du compte : ".$compte[4]."</b><br />Date ouverture : ".$compte[1]."<br />Type : ".$compte[2]."<br />Solde : ".$compte[3]."€<br />IBAN : ".$compte[5]."<br />BIC : ".$compte[6]."<br />Autorisation découvert : ".$compte[7]."€</p>");                      
-                    //Gérer les CB et chéquiers
+                while($compte = $resultat->fetch_row())  {
+
+                    
+                    /*echo("<table><tr><td><table><tr><td><p><h3>n°compte</p></td><td>".$i."</td></tr></table></td><td><button type="submit" class="bouton_Valider" onclick="toggle_div(this,'id-du-div');"><img src="add-plus-button.png" style="width:25px; margin-right:20px;"></button></td></tr></table>
+                    <div id="id-du-div" style="display:none;"><table><tr><td><p><h3>libellé du compte</p></td><td>".$compte[4]."</td></tr><tr><td><p><h3>date ouverture</p></td><td>".$compte[1]."</td></tr><tr><td><p><h3>solde</p></td><td>".$compte[3]."</td></tr><tr><td><p><h3>iban</p></td><td>".$compte[5]."</td></tr><tr><td><p><h3>bic</p></td><td>".$compte[6]."</td></tr><tr><td><p><h3>autorisation découvert</p></td><td>".$compte[7]."</td></tr></table>
+                    </div>
+                    
+                    <script type="text/javascript">
+                    function toggle_div(bouton, id) { // On déclare la fonction toggle_div qui prend en param le bouton et un id
+                    var div = document.getElementById(id); // On récupère le div ciblé grâce à l'id
+                    if(div.style.display=="none") { // Si le div est masqué...
+                        div.style.display = "block"; // ... on l'affiche...
+                        bouton.innerHTML = "-"; // ... et on change le contenu du bouton.
+                    } else { // S'il est visible...
+                        div.style.display = "none"; // ... on le masque...
+                        bouton.innerHTML = "+"; // ... et on change le contenu du bouton.
+                    }
+                    }
+                    </script>";)*/
+
+                    echo ("<table><tr><td><p><h3>n°compte</p></td><td>".$i."</td></tr><tr><td><p><h3>libellé du compte</p></td><td>".$compte[4]."</td></tr><tr><td><p><h3>date ouverture</p></td><td>".$compte[1]."</td></tr><tr><td><p><h3>solde</p></td><td>".$compte[3]."</td></tr><tr><td><p><h3>iban</p></td><td>".$compte[5]."</td></tr><tr><td><p><h3>bic</p></td><td>".$compte[6]."</td></tr><tr><td><p><h3>autorisation découvert</p></td><td>".$compte[7]."</td></tr></table>");
+                    //Gérer les CB et chéquiers//
                     if ($compte[2]=="courant") {
                         //CB
                         $requete = $conn->prepare("SELECT cb.* FROM cb WHERE cb.id_Compte_Rattache = ".$compte[0]);
@@ -200,11 +217,9 @@
                             </form>
                         <?php }
                     }
-                    echo "<hr>";
                     $i = $i + 1;
                 }
             ?>
-            <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'">Ouvrir un compte</button><br /><br />
         </div>
 
         <div id="operations" class="item_EC">
@@ -243,22 +258,16 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <?php 
                 $i = 1;
-                echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</td><td>Supprimer</td></tr>");
+                echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</tr>");
                 while($beneficiaire = $resultat3->fetch_row()) {
                     if ($beneficiaire[3]==1) {
                         echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>Actif</td>"); ?>
                         <td><form method="post" action="virement.php">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Virement" value="<?php echo ($beneficiaire[0]) ?>">Faire virement</button><br /><br />
-                        </form></td>
-                        <td><form method="post" action="suppression_Beneficiaire.php">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
                         </form></td></tr>
                     <?php } else {
-                        echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td><td></td>"); ?>
-                        <td><form method="post" action="suppression_Beneficiaire.php">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
-                        </form></td></tr>
-                    <?php }
+                        echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td>");
+                    }
                     $i = $i + 1;
                 }
                 ?>
