@@ -94,7 +94,7 @@
                             <?php }
                             
                             //Chéquier
-                            $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$compte[0]);
+                            $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$compte[0]." AND validite_Chequier = 1");
                             $requete->execute();
                             $resultat2 = $requete->get_result();
                             $chequier = $resultat2->fetch_assoc();

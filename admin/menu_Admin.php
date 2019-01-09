@@ -40,18 +40,7 @@
     </header>
 
     <body> <br />
-        <button onclick="topFunction()" id="bouton_Haut" title="Haut de la page">H</button>
-        <script>
-        // When the user scrolls the page, execute myFunction 
-        window.onscroll = function() {myFunction()};
-
-        function myFunction() {
-        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-        document.getElementById("myBar").style.width = scrolled + "%";
-        }
-        </script>
+        <button onclick="topFunction()" id="bouton_Haut" title="Haut de la page"><i class="fas fa-angle-up"></i></button>
     </body>
 
 

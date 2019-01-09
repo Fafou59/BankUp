@@ -1,5 +1,5 @@
 <?php
-    include('menu.php');
+    include('menu_Admin.php');
 ?>
 
 <!DOCTYPE HTML>
@@ -51,14 +51,10 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $sql = "UPDATE client SET civilite_Client = '".$civilite."', nom_Client = '".$nom."', prenom_Client = '".$prenom."', date_Naissance_Client = '".$date_Naissance."', adresse_Mail_Client = '".$email."', telephone_Client = '".$telephone."', num_Voie_Client = '".$numero_Voie."', voie_Client = '".$voie."', code_Postal_Client = '".$code_Postal."', ville_Client = '".$ville."', agence_Client = '".$agence."', pays_Client = '".$pays."'";
+                $sql = "UPDATE client SET civilite_Client = '".$civilite."', nom_Client = '".$nom."', prenom_Client = '".$prenom."', date_Naissance_Client = '".$date_Naissance."', adresse_Mail_Client = '".$email."', telephone_Client = '".$telephone."', num_Voie_Client = '".$numero_Voie."', voie_Client = '".$voie."', code_Postal_Client = '".$code_Postal."', ville_Client = '".$ville."', agence_Client = '".$agence."', pays_Client = '".$pays."' WHERE client.id_Client = '".$_SESSION['id']."'";
 
-                if ($conn->query($sql) === TRUE) { ?>
-                    <div class="container">
-                        <h1>Votre profil a bien été modifié.</h1>
-                        <p>Un mail vous a été envoyé à l'adresse renseignée.</p>
-                        <hr>
-                    </div> <?php
+                if ($conn->query($sql) === TRUE) {
+                    header('Location: mirroring_Admin.php');
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
