@@ -32,7 +32,7 @@
     $requete->execute();
     $resultat = $requete->get_result();
     // Réaliser requête bénéficiaires
-    $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE '".$_SESSION['id']."' = beneficiaire.id_Client_Emetteur");
+    $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE beneficiaire.id_Client_Emetteur = '".$_SESSION['id']."'");
     $requete3->execute();
     $resultat3 = $requete3->get_result();
     
@@ -100,28 +100,28 @@
                             <td><label>adresse postale</label> :</td>
                             <td>
                                 <label for="numero_Voie">n° de voie</label> :
-                                <input type="text" name="numero_Voie" id="numero_Voie" size="5" minlength="0" maxlength="5" placeholder="Entrez votre n° voie" value="<?php echo ($client['num_Voie_Client']) ?>"  />
+                                <div id="infos"><?php echo ($client['num_Voie_Client'])?></div>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 <label for="voie">voie</label> :
-                                <input type="text" name="voie" id="voie" size="75" minlength="" maxlength="75" placeholder="Entrez votre voie" value="<?php echo ($client['voie_Client']) ?>" />
+                                <div id="infos"><?php echo ($client['voie_Client']) ?></div>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td> 
                                 <label for="code_Postal">code postal</label> :
-                                <input type="text" name="code_Postal" id="code_Postal" size="5" minlength="5" maxlength="5" placeholder="Entrez votre code postal" value="<?php echo ($client['code_Postal_Client']) ?>" />
+                                <div id="infos"><?php echo ($client['code_Postal_Client'])?> </div>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 <label for="ville">ville</label> :
-                                <input type="text" name="ville" id="ville" size="10" minlength="5" maxlength="25" placeholder="Entrez votre ville" value="<?php echo ($client['ville_Client']) ?>" />
+                                <div id="infos"><?php echo ($client['ville_Client'])?></div>
                             </td>
                         </tr>
 
@@ -137,11 +137,29 @@
                     </table><br />
                 </form>
                 <br /><hr>
-                <h2>Votre agence</h2>
-                <div>
-                    <?php echo("BankUP ".$agence['ville_Agence']."<br />".$agence['num_Voie_Agence']." ".$agence['voie_Agence']."<br />".$agence['code_Postal_Agence']." ".$agence['ville_Agence']."<br />"); ?>
-                </div>
-                </div>
+                <h1 style="font-variant: small-caps; margin-bottom: 0px;">votre agence</h1>
+                <p>Vous trouverez ci-dessous les informations sur votre agence de rattachement.</p>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>   
+                        <td><label for="nom">nom de l'agence</label> :</td>
+                        <td id="infos"><?php echo ("BankUP ".$agence['ville_Agence']) ?></td>   
+                    </tr>
+                    <tr>
+                        <td><label>adresse postale de l'agence</label> :</td>
+                        <td>
+                            <label for="numero_Voie"></label>
+                            <div id="infos"><?php echo ($agence['num_Voie_Agence']." ".$agence['voie_Agence'])?></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label for="voie"></label>
+                            <div id="infos"><?php echo ($agence['code_Postal_Agence']." ".$agence['ville_Agence']) ?></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div id="comptes" class="item_EC">
@@ -171,7 +189,7 @@
                     }
                     </script>";)*/
 
-                    echo ("<table><tr><td><p><h3>n°compte</p></td><td>".$i."</td></tr><tr><td><p><h3>libellé du compte</p></td><td>".$compte[4]."</td></tr><tr><td><p><h3>date ouverture</p></td><td>".$compte[1]."</td></tr><tr><td><p><h3>solde</p></td><td>".$compte[3]."</td></tr><tr><td><p><h3>iban</p></td><td>".$compte[5]."</td></tr><tr><td><p><h3>bic</p></td><td>".$compte[6]."</td></tr><tr><td><p><h3>autorisation découvert</p></td><td>".$compte[7]."</td></tr></table>");
+                    echo ("<table><tr><td><h3>n°compte</td><td>".$i."</td></tr><tr><td><h3>libellé du compte</td><td>".$compte[4]."</td></tr><tr><td><h3>date ouverture</td><td>".$compte[1]."</td></tr><tr><td><h3>solde</td><td>".$compte[3]."</td></tr><tr><td><h3>iban</td><td>".$compte[5]."</td></tr><tr><td><h3>bic</td><td>".$compte[6]."</td></tr><tr><td><h3>autorisation découvert</td><td>".$compte[7]."</td></tr></table>");
                     //Gérer les CB et chéquiers//
                     if ($compte[2]=="courant") {
                         //CB
