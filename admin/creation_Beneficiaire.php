@@ -21,22 +21,31 @@
     $resultat = $requete->get_result();
     $compte = $resultat->fetch_assoc();
 
-    $requete = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire, compte WHERE '".$id_Emetteur."' = beneficiaire.id_Client_Emetteur AND '".$compte['id_Compte']."' = beneficiaire.id_Compte_Beneficiaire");
-    $requete->execute();
-    $resultat = $requete->get_result();
-    $beneficiaire = $resultat->fetch_assoc();
-
-    if (($beneficiaire['id_Compte_Beneficiaire']==$compte['id_Compte']) AND ($beneficiaire['id_Client_Emetteur']==$id_Emetteur)) {
-        header('Location: mirroring_Admin.php');
-    } else {    
-        // Réaliser requête
-        $sql = "INSERT INTO beneficiaire (id_Compte_Beneficiaire, id_Client_Emetteur, libelle_Beneficiaire, validite_Beneficiaire)
-        VALUES ('".$compte['id_Compte']."', '".$id_Emetteur."', '".$libelle_Beneficiaire."', 1)";
-        
-        if ($conn->query($sql) === TRUE) {
+    if (isset($compte)) {
+        if ($compte['id_Detenteur_Compte']==$id_Emetteur) {
             header('Location: mirroring_Admin.php');
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            $requete = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire, compte WHERE '".$id_Emetteur."' = beneficiaire.id_Client_Emetteur AND '".$compte['id_Compte']."' = beneficiaire.id_Compte_Beneficiaire");
+            $requete->execute();
+            $resultat = $requete->get_result();
+            $beneficiaire = $resultat->fetch_assoc();
+
+            if (($beneficiaire['id_Compte_Beneficiaire']==$compte['id_Compte']) AND ($beneficiaire['id_Client_Emetteur']==$id_Emetteur)) {
+                header('Location: mirroring_Admin.php');
+            } else {    
+                // Réaliser requête
+                $sql = "INSERT INTO beneficiaire (id_Compte_Beneficiaire, id_Client_Emetteur, libelle_Beneficiaire, validite_Beneficiaire)
+                VALUES ('".$compte['id_Compte']."', '".$id_Emetteur."', '".$libelle_Beneficiaire."', 1)";
+                
+                if ($conn->query($sql) === TRUE) {
+                    header('Location: mirroring_Admin.php');
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+            }
         }
+    } else {
+        //messsage compte non trouvé
+        header('Location: mirroring_Admin.php');
     }
 ?>
