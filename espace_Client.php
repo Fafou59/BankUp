@@ -166,70 +166,91 @@
             <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos comptes</h1>
             <p style="font-size: 15px">Vous pouvez consulter ci-dessous vos comptes. Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
             <hr>
-            <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Ouvrir un compte</button><br /><br />
+            <button type="submit" class="bouton_Ouvrir" onclick="location.href='ouvrir_Compte.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Ouvrir un compte</button><br /><br />
             <br>
             <hr>
             <?php 
                 $i = 1;
                 while($compte = $resultat->fetch_row())  {
                     ?>
-                    <table class="onglet_compte" style="border:none; background-color: #E80969; margin:30px 0px 20px 5px;"><tr style="padding: 0px 0px 0px 0px; height: 50px;"><td style="padding: 0px 0px 0px 0px; border:none;"><table class="libelle_compte" style="margin-bottom: 0px;margin-top: 0px; border:none;"><tr style="padding: 0px 0px 0px 0px"><td style="padding-right:30px; padding:0px 0px 0px 0px; border:none;margin:0px 20px 0px 0px;color:white; font-size:90%;"><p><h3>compte n°</p></td><td style="padding: 0px 800px 0px 0px; border:none; color:white; font-size:90%;"><?php echo"$i"?></td></tr></table></td><td style="padding: 0px 0px 0px 0px; border:none;height: 50px;"><button type="submit" class="bouton_Valider" onclick="toggle_div(this,<?php echo $i;?>);" style="width:40px; height:50px; padding-left:80px; margin:0px 0px 0px 0px;background-color: #E80969;"><img src="angle-arrow-down.png" style="width:25px; margin-right:20px;"></button></td></tr></table>
+                    <table class="onglet_compte" style="background-color: #E80969; width:100%;"><tr><td style="color: white; padding-left:5px; padding-right:5px; width: 8%;"><h3>compte</h3></td><td style="color: white; width:30%"><h3><?php echo $compte[4]?></h3></td><td style="color: white; padding-right:5px; width: 45%;text-align:right;font-weight: normal; font-variant: small-caps;">solde</td><td style="color: white;text-align:left;font-weight: normal; font-variant: small-caps; padding-left:5px"><?php echo $compte[3]?> €</td><td style="width:10%"><button type="submit" class="bouton_Compte" onclick="toggle_div(this,<?php echo $i;?>);"><img src="angle-arrow-down.png" style="width:25px"></button></td></tr></table>
                     
-                    <div id=<?php echo $i;?> style="display:none;"><table style="margin-top:0px;"><tr><td><p><h3>libellé du compte</p></td><td><?php echo $compte[4]?></td></tr><tr><td><p><h3>date ouverture</p></td><td><?php echo $compte[1]?></td></tr><tr><td><p><h3>solde</p></td><td><?php echo $compte[3]?></td></tr><tr><td><p><h3>iban</p></td><td><?php echo $compte[5]?></td></tr><tr><td><p><h3>bic</p></td><td><?php echo $compte[6]?></td></tr><tr><td><p><h3>autorisation découvert</p></td><td><?php echo $compte[7]?></td></tr></table></div>
-                                 
+                    <div id=<?php echo $i;?> style="display:none;"><table style="margin-left:30px;"><tr><td><p><h3>type de compte</p></td><td style="text-transform: capitalize; padding-left:40px;"><?php echo $compte[2]?></td></tr><tr><td><p><h3>date ouverture</p></td><td style="padding-left:40px;"><?php echo $compte[1]?></td></tr><tr><td><p><h3>iban</p></td><td style="padding-left:40px;"><?php echo $compte[5]?></td></tr><tr><td><p><h3>bic</p></td><td style="padding-left:40px;"><?php echo $compte[6]?></td></tr><tr><td><p><h3>autorisation découvert</p></td><td style="padding-left:40px;"><?php echo $compte[7]?> €</td></tr></table><?php
+
+                    ?>
                     
-                    
-                    <script type="text/javascript">
-                    function toggle_div(bouton, id) { // On déclare la fonction toggle_div qui prend en param le bouton et un id
-                    var div = document.getElementById(id); // On récupère le div ciblé grâce à l'id
-                    if(div.style.display=="none") { // Si le div est masqué...
-                        div.style.display = "block"; // ... on l'affiche...
-                        bouton.innerHTML = "<img src=\"up-arrow.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
-                    } else { // S'il est visible...
-                        div.style.display = "none"; // ... on le masque...
-                        bouton.innerHTML = "<img src=\"angle-arrow-down.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
-                    }
-                    }
-                    
-                    </script>
                     <?php
-
-
                     if ($compte[2]=="courant") {
+                
+                        ?> <table>
+                        <?php
                         //CB
                         $requete = $conn->prepare("SELECT cb.* FROM cb WHERE cb.id_Compte_Rattache = ".$compte[0]);
                         $requete->execute();
                         $resultat2 = $requete->get_result();
                         $cb = $resultat2->fetch_assoc();
+                        $random_number = intval( "0" . rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) ); // random(ish) 5 digit int
+                        ?><tr>
+                        <?php
                         if ($cb['id_Compte_Rattache']==$compte[0]) {
-                            echo("<p><h4>Carte bancaire associée :</h4>Numéro de carte : ".$cb['num_Cb']."<br />Cryptogramme : ".$cb['cryptogramme_Cb']."<br />Date expiration : ".$cb['date_Expiration_Cb']."</p>");
-                        } else {
+                            ?> <table class="onglet_Paiement"><tr><td style="color: white; padding-left:5px; padding-right:5px; width: 300px;"><h3>carte associée</h3></td><td><button type="submit" class="bouton_Mini_Compte" style="background-color: #555;" onclick="toggle_div(this,<?php echo $random_number;?>);"><img src="angle-arrow-down.png" style="width:25px; float:right;"></button></td></tr></table>
+                            <div id="<?php echo $random_number;?>" style="display:none;"><table style="margin-top:0px; margin-left: 30px;"><tr><td><h3>numéro de carte</td><td style="text-transform: capitalize; padding-left:40px;"><?php echo $cb['num_Cb']?></td></tr><tr><td><p><h3>cryptogramme</p></td><td style="padding-left:40px;"><?php echo $cb['cryptogramme_Cb']?></td></tr><tr><td><p><h3>date d'expiration</p></td><td style="padding-left:40px;"><?php echo $cb['date_Expiration_Cb'] ?></td></tr></table></div>
+                        <?php } else {
                             ?>
+                            <p>Vous n'avez pas encore de carte.<p>
                             <form method="post" action="creation_Cb.php">
-                                <button name="id_Compte" type="submit" class="bouton_Cb" value="<?php echo ($compte[0]) ?>">Demander une carte</button><br /><br />
+                                <button name="id_Compte" type="submit" class="bouton_Ouvrir" value="<?php echo ($compte[0]) ?>"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Demander une carte</button><br /><br />
                             </form>
                         <?php }
+                        ?></tr>
+                        <?php
+
                         //Chéquier
                         $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$compte[0]." AND validite_Chequier = 1");
                         $requete->execute();
                         $resultat2 = $requete->get_result();
                         $chequier = $resultat2->fetch_assoc();
+                        $random_number = intval( "0" . rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) ); // random(ish) 5 digit int
+                        ?><tr>
+                        <?php    
                         if ($chequier['id_Compte_Rattache']==$compte[0]) {
-                            echo("<p><h4>Chequier associé :</h4>Date d'émission : ".$chequier['date_Emission_Chequier']."</p>"); ?>
-                            <form method="post" action="creation_Chequier.php">
-                                <button name="id_Compte" type="submit" class="bouton_Chequier" value="<?php echo ($compte[0]) ?>">Demander un nouveau chéquier</button><br /><br />
-                            </form>
+                            ?><table class="onglet_Paiement"><tr><td style="color: white; padding-left:5px; padding-right:5px; width: 300px;"><h3>chéquier associé</h3></td><td><button type="submit" class="bouton_Mini_Compte" onclick="toggle_div(this,<?php echo $random_number ;?>)"><img src="angle-arrow-down.png" style="width:25px; float:right;"></button></td></tr></table>
+                            <div id= <?php echo $random_number;?> style="display:none;">
+                            <table style="margin-top:0px; margin-bottom:5px; margin-left: 30px;"><tr><td><p><h3>date d'émission</p></td><td style="text-transform: capitalize; padding-left:40px;"><?php echo $chequier['date_Emission_Chequier']?></td></tr></table>
+                            <form method="post" action="creation_Chequier.php" style="height:80px">
+                                <button name="id_Compte" type="submit" class="bouton_Ouvrir" style="padding-left: 15px; margin-left: 30px;text-align:left;" value="<?php echo ($compte[0]) ?>"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">nouveau chéquier</button><br /><br />
+                            </form></div>
                         <?php } else {
                             ?>
-                            <form method="post" action="creation_Chequier.php">
-                                <button name="id_Compte" type="submit" class="bouton_Chequier" value="<?php echo ($compte[0]) ?>">Demander un chéquier</button><br /><br />
+                            <p>Vous n'avez pas encore de chéquier.<p>
+                            <form method="post" action="creation_Chequier.php" style="height:80px">
+                                <button name="id_Compte" type="submit" class="bouton_Ouvrir" style="padding-left: 15px;margin-left: 30px; text-align:left;" value="<?php echo ($compte[0]) ?>"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">nouveau chéquier</button><br /><br />
                             </form>
                         <?php }
+                        ?> </tr></table>
+                        <?php
                     }
+                    ?>
+                    </div>
+                    <?php
                     $i = $i + 1;
-                }
-            ?>
+                } 
+                    ?> 
+                    <script type="text/javascript">
+                            function toggle_div(bouton, id) { // On déclare la fonction toggle_div qui prend en param le bouton et un id
+                            var div = document.getElementById(id); // On récupère le div ciblé grâce à l'id
+                            if(div.style.display=="none") { // Si le div est masqué...
+                                div.style.display = "block"; // ... on l'affiche...
+                                bouton.innerHTML = "<img src=\"up-arrow.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
+                            } else { // S'il est visible...
+                                div.style.display = "none"; // ... on le masque...
+                                bouton.innerHTML = "<img src=\"angle-arrow-down.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
+                            }
+                            }
+                            
+                    </script>
         </div>
+
         <div id="operations" class="item_EC">
             <h1>Vos opérations</h1>
             <p>Liste des opérations passées + lien vers formulaire virement</p>

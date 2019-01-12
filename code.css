@@ -424,7 +424,7 @@ input[type=textsearch]:focus {
 div#comptes.item_EC {
 display: none;
 padding: 10px 20px;
-height: 200%;
+height: 250%;
 background-color: white;
 margin-left:10%; 
 margin-right:10%; 
@@ -433,25 +433,32 @@ margin-bottom: 50px;
 align-content: center;
 }
 
-  
-  
 
 div#comptes.item_EC td {
-  padding-right:100px;
-  padding-left:10px;
+width: auto;
+height:auto;
 }
+
 div#comptes.item_EC tr {
-height: 2px;
+width: auto;
+height:auto;
+padding:0px 0px 0px 0px;
+margin: 0px 0px 0px 0px;
 }
 
 div#comptes.item_EC p {
-  padding : 0px 0px 0px 0px;
-  margin : 0px 0px 0px 0px;
+width: auto;
+height:auto;
+padding : 0px 0px 0px 0px;
+margin : 0px 0px 0px 0px;
   }
 
 
 div#comptes.item_EC table {
-  margin-top:30px;  }
+  width: auto;
+  margin-bottom : 20px;
+  margin top : 30px; 
+ }
 
 div#comptes.item_EC h3 {
   font-variant: small-caps;
@@ -461,14 +468,19 @@ div#comptes.item_EC h3 {
 
 
 
-  div#comptes.item_EC button {
-    margin-top:0px;
+  .bouton_Ouvrir {
     border-radius: 0px;
     width: 180px;
     height: 50px;
     font-size:90%; 
     float:left; 
     font-variant: small-caps;
+    background-color: #4CAF50;
+    margin-left: 5px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: 0;
     }
     
   div#informations.item_EC table {
@@ -486,11 +498,45 @@ div#comptes.item_EC h3 {
     }
   
 .onglet_compte {
-
   border:none; 
   background-color: #E80969; 
   margin:30px 0px 20px 5px;
+  height: 50px;
 }
+
+.bouton_Compte {
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  width:auto; 
+  height: auto; 
+  padding-left:0px 0px 0px 0px; 
+  margin:0% 0% 0% 20%;
+  background-color: #E80969;
+}
+
+.bouton_Mini_Compte {
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  width:auto; 
+  height: auto; 
+  padding-left:0px 0px 0px 0px; 
+  margin:0% 0% 0% 20%;
+  background-color: #555;
+  float: right;
+}
+
+.onglet_Paiement {
+  margin-left: 30px;
+  background-color: #555; 
+  height : 50px;
+}
+
+
+
+
+
 
 
 
