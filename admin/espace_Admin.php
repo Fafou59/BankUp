@@ -23,6 +23,12 @@
     $requete = $conn->prepare("SELECT client.* FROM client WHERE client.agence_Client = '".$_SESSION['admin_Agence']."'");
     $requete->execute();
     $clients = $requete->get_result();
+
+    // Réaliser requête bénéficiaires
+    $requete = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire, client WHERE beneficiaire.validite_Beneficiaire = 0 AND beneficiaire.id_Client_Emetteur IN (SELECT client.id_Client FROM client WHERE client.agence_Client = '".$_SESSION['admin_Agence']."')");
+    $requete->execute();
+    $beneficiaire = $requete3->get_result();
+
 ?>
 
 <!DOCTYPE HTML>
@@ -39,9 +45,9 @@
     <body>
         <div id="contenu">
             <button class="lienEC" onclick="openPage('clients', this, '#E80969')" id="defaultOpen">Liste des clients</button>
-            <button class="lienEC" onclick="openPage('cheques', this, '#E80969')" >Chèques à valider</button>
+            <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')" >Bénéficiaires à valider</button>
             <button class="lienEC" onclick="openPage('operations', this, '#E80969')">Vos opérations</button>
-            <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')">Vos bénéficiaires</button>
+            <button class="lienEC" onclick="openPage('comptes', this, '#E80969')">Vos bénéficiaires</button>
 
             <div id="clients" class="item_EC">
                 <h1>Les clients de votre agence</h1>
@@ -68,8 +74,8 @@
                     </table>
                 </div>
 
-            <div id="cheques" class="item_EC">
-                <h1>Les chèques à valider</h1>
+            <div id="beneficiaires" class="item_EC">
+                <h1>Les bénéficiaires à valider</h1>
                 <p>Vous pouvez consulter ci-dessous les chèques en attente de validation.</p>
                 <hr>
                 <?php 
@@ -123,7 +129,7 @@
                 <p>Liste des opérations passées + lien vers formulaire virement</p>
             </div>
 
-            <div id="beneficiaires" class="item_EC">
+            <div id="comptes" class="item_EC">
                 <h1>Vos bénéficiaires</h1>
                 <p>
                     Vous trouverez ci-dessous la liste de vos bénéficiaires.<br />
