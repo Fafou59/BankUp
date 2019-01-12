@@ -32,9 +32,17 @@
     $requete->execute();
     $resultat = $requete->get_result();
     // Réaliser requête bénéficiaires
-    $requete3 = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE beneficiaire.id_Client_Emetteur = '".$_SESSION['id']."'");
-    $requete3->execute();
-    $resultat3 = $requete3->get_result();
+    $requete = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE beneficiaire.id_Client_Emetteur = '".$_SESSION['id']."'");
+    $requete->execute();
+    $beneficiaires = $requete->get_result();
+    // Réaliser requête opérations emetteur
+    $requete = $conn->prepare("SELECT operation.*, compte.* FROM operation, compte WHERE ((id_Compte = id_Emetteur_Operation) AND (operation.id_Emetteur_Operation IN (SELECT compte.id_Compte FROM compte WHERE compte.id_Detenteur_Compte = '".$_SESSION['id']."')))");
+    $requete->execute();
+    $operations_emetteur = $requete->get_result();
+    // Réaliser requête opérations récepteur
+    $requete = $conn->prepare("SELECT operation.*, compte.* FROM operation, compte WHERE((id_Compte = id_Recepteur_Operation) AND (operation.id_Recepteur_Operation IN (SELECT compte.id_Compte FROM compte WHERE compte.id_Detenteur_Compte = '".$_SESSION['id']."')))");
+    $requete->execute();
+    $operations_recepteur = $requete->get_result();
     
 ?>
 
@@ -45,6 +53,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="code.css" />
         <script type="text/javascript" src="menu_EC.jsx"></script>
+        <script type="text/javascript" src="tri.jsx"></script>
         <title>BankUP - Espace Client</title>
     </head>
 
@@ -253,8 +262,41 @@
 
         <div id="operations" class="item_EC">
             <h1>Vos opérations</h1>
-            <p>Liste des opérations passées + lien vers formulaire virement</p>
+            <p>Retrouvez la liste de vos opérations passées. Vous pouvez également faire un virement un cliquant sur le bouton correspondant.</p>
+            <button type="submit" class="bouton_Valider" onclick="location.href='virement.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Faire un virement</button><br /><br />
+            <hr>
+            <table id='liste_Operations' width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th onclick="sortTable(0)">Date</th>
+                    <th onclick="sortTable(1)">Type opération</th>
+                    <th onclick="sortTable(2)">Compte</th>
+                    <th onclick="sortTable(3)">Montant</th>
+                    <th onclick="sortTable(4)">Statut</th>
+                </tr>
+            <?php while($operation = $operations_emetteur->fetch_row()) { ?>
+                <tr>
+                    <td><?php echo($operation[1]) ?></td>
+                    <td><?php echo($operation[4]) ?></td>
+                    <td><?php echo($operation[13]) ?></td>
+                    <td><?php echo('<font color="red">-'.$operation[5].'€</font>') ?></td>
+                    <td><?php if ($operation[8]==1) {echo('Effectué');} else {echo('En attente de validation');}?>
+                </tr>
+            <?php }
+            while($operation = $operations_recepteur->fetch_row()) { ?>
+                <tr>
+                    <td><?php echo($operation[1]) ?></td>
+                    <td><?php echo($operation[4]) ?></td>
+                    <td><?php echo($operation[13]) ?></td>
+                    <td><?php echo('<font color="green">+'.$operation[5].'€</font>') ?></td>
+                    <td><?php if ($operation[8]==1) {echo('Effectué');} else {echo('En attente de validation');}?>
+                </tr>
+            <?php } ?>
+            </table>
         </div>
+        <script>
+            document.addEventListener("load", sortTable(0));
+            document.addEventListener("load", sortTable(0));
+        </script>
 
         <div id="beneficiaires" class="item_EC">
             <h1>Vos bénéficiaires</h1>
