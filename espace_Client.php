@@ -167,30 +167,34 @@
             <p style="font-size: 15px">Vous pouvez consulter ci-dessous vos comptes. Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
             <hr>
             <button type="submit" class="bouton_Valider" onclick="location.href='ouvrir_Compte.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Ouvrir un compte</button><br /><br />
+            <br>
+            <hr>
             <?php 
                 $i = 1;
                 while($compte = $resultat->fetch_row())  {
-
+                    ?>
+                    <table class="onglet_compte" style="border:none; background-color: #E80969; margin:30px 0px 20px 5px;"><tr style="padding: 0px 0px 0px 0px; height: 50px;"><td style="padding: 0px 0px 0px 0px; border:none;"><table class="libelle_compte" style="margin-bottom: 0px;margin-top: 0px; border:none;"><tr style="padding: 0px 0px 0px 0px"><td style="padding-right:30px; padding:0px 0px 0px 0px; border:none;margin:0px 20px 0px 0px;color:white; font-size:90%;"><p><h3>compte n°</p></td><td style="padding: 0px 800px 0px 0px; border:none; color:white; font-size:90%;"><?php echo"$i"?></td></tr></table></td><td style="padding: 0px 0px 0px 0px; border:none;height: 50px;"><button type="submit" class="bouton_Valider" onclick="toggle_div(this,<?php echo $i;?>);" style="width:40px; height:50px; padding-left:80px; margin:0px 0px 0px 0px;background-color: #E80969;"><img src="angle-arrow-down.png" style="width:25px; margin-right:20px;"></button></td></tr></table>
                     
-                    /*echo("<table><tr><td><table><tr><td><p><h3>n°compte</p></td><td>".$i."</td></tr></table></td><td><button type="submit" class="bouton_Valider" onclick="toggle_div(this,'id-du-div');"><img src="add-plus-button.png" style="width:25px; margin-right:20px;"></button></td></tr></table>
-                    <div id="id-du-div" style="display:none;"><table><tr><td><p><h3>libellé du compte</p></td><td>".$compte[4]."</td></tr><tr><td><p><h3>date ouverture</p></td><td>".$compte[1]."</td></tr><tr><td><p><h3>solde</p></td><td>".$compte[3]."</td></tr><tr><td><p><h3>iban</p></td><td>".$compte[5]."</td></tr><tr><td><p><h3>bic</p></td><td>".$compte[6]."</td></tr><tr><td><p><h3>autorisation découvert</p></td><td>".$compte[7]."</td></tr></table>
-                    </div>
+                    <div id=<?php echo $i;?> style="display:none;"><table style="margin-top:0px;"><tr><td><p><h3>libellé du compte</p></td><td><?php echo $compte[4]?></td></tr><tr><td><p><h3>date ouverture</p></td><td><?php echo $compte[1]?></td></tr><tr><td><p><h3>solde</p></td><td><?php echo $compte[3]?></td></tr><tr><td><p><h3>iban</p></td><td><?php echo $compte[5]?></td></tr><tr><td><p><h3>bic</p></td><td><?php echo $compte[6]?></td></tr><tr><td><p><h3>autorisation découvert</p></td><td><?php echo $compte[7]?></td></tr></table></div>
+                                 
+                    
                     
                     <script type="text/javascript">
                     function toggle_div(bouton, id) { // On déclare la fonction toggle_div qui prend en param le bouton et un id
                     var div = document.getElementById(id); // On récupère le div ciblé grâce à l'id
                     if(div.style.display=="none") { // Si le div est masqué...
                         div.style.display = "block"; // ... on l'affiche...
-                        bouton.innerHTML = "-"; // ... et on change le contenu du bouton.
+                        bouton.innerHTML = "<img src=\"up-arrow.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
                     } else { // S'il est visible...
                         div.style.display = "none"; // ... on le masque...
-                        bouton.innerHTML = "+"; // ... et on change le contenu du bouton.
+                        bouton.innerHTML = "<img src=\"angle-arrow-down.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
                     }
                     }
-                    </script>";)*/
+                    
+                    </script>
+                    <?php
 
-                    echo ("<table><tr><td><h3>n°compte</td><td>".$i."</td></tr><tr><td><h3>libellé du compte</td><td>".$compte[4]."</td></tr><tr><td><h3>date ouverture</td><td>".$compte[1]."</td></tr><tr><td><h3>solde</td><td>".$compte[3]."</td></tr><tr><td><h3>iban</td><td>".$compte[5]."</td></tr><tr><td><h3>bic</td><td>".$compte[6]."</td></tr><tr><td><h3>autorisation découvert</td><td>".$compte[7]."</td></tr></table>");
-                    //Gérer les CB et chéquiers//
+
                     if ($compte[2]=="courant") {
                         //CB
                         $requete = $conn->prepare("SELECT cb.* FROM cb WHERE cb.id_Compte_Rattache = ".$compte[0]);
@@ -226,7 +230,6 @@
                 }
             ?>
         </div>
-
         <div id="operations" class="item_EC">
             <h1>Vos opérations</h1>
             <p>Liste des opérations passées + lien vers formulaire virement</p>
