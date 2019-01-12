@@ -438,21 +438,25 @@ align-content: center;
 
 div#comptes.item_EC td {
   padding-right:100px;
-  border-bottom: 1px solid #ddd;
   padding-left:10px;
 }
 div#comptes.item_EC tr {
 height: 2px;
 }
 
-div#comptes.item_EC table {
-  margin-top:30px;
-  border: 1px solid #ddd;
-  margin-bottom:100px;
+div#comptes.item_EC p {
+  padding : 0px 0px 0px 0px;
+  margin : 0px 0px 0px 0px;
   }
+
+
+div#comptes.item_EC table {
+  margin-top:30px;  }
 
 div#comptes.item_EC h3 {
   font-variant: small-caps;
+  padding : 0px 0px 0px 0px;
+  margin : 0px 0px 0px 0px;
   }
 
 
@@ -480,6 +484,13 @@ div#comptes.item_EC h3 {
     float:left; 
     font-variant: small-caps;
     }
+  
+.onglet_compte {
+
+  border:none; 
+  background-color: #E80969; 
+  margin:30px 0px 20px 5px;
+}
 
 
 
