@@ -22,22 +22,26 @@
     $compte = $resultat->fetch_assoc();
 
     if (isset($compte)) {
-        $requete = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire, compte WHERE '".$id_Emetteur."' = beneficiaire.id_Client_Emetteur AND '".$compte['id_Compte']."' = beneficiaire.id_Compte_Beneficiaire");
-        $requete->execute();
-        $resultat = $requete->get_result();
-        $beneficiaire = $resultat->fetch_assoc();
-
-        if (($beneficiaire['id_Compte_Beneficiaire']==$compte['id_Compte']) AND ($beneficiaire['id_Client_Emetteur']==$id_Emetteur)) {
+        if ($compte['id_Detenteur_Compte']==$id_Emetteur) {
             header('Location: espace_Client.php');
         } else {
-            // Réaliser requête
-            $sql = "INSERT INTO beneficiaire (id_Compte_Beneficiaire, id_Client_Emetteur, libelle_Beneficiaire, validite_Beneficiaire)
-            VALUES ('".$compte['id_Compte']."', '".$id_Emetteur."', '".$libelle_Beneficiaire."', 0)";
-            
-            if ($conn->query($sql) === TRUE) {
+            $requete = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire, compte WHERE '".$id_Emetteur."' = beneficiaire.id_Client_Emetteur AND '".$compte['id_Compte']."' = beneficiaire.id_Compte_Beneficiaire");
+            $requete->execute();
+            $resultat = $requete->get_result();
+            $beneficiaire = $resultat->fetch_assoc();
+
+            if (($beneficiaire['id_Compte_Beneficiaire']==$compte['id_Compte']) AND ($beneficiaire['id_Client_Emetteur']==$id_Emetteur)) {
                 header('Location: espace_Client.php');
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                // Réaliser requête
+                $sql = "INSERT INTO beneficiaire (id_Compte_Beneficiaire, id_Client_Emetteur, libelle_Beneficiaire, validite_Beneficiaire)
+                VALUES ('".$compte['id_Compte']."', '".$id_Emetteur."', '".$libelle_Beneficiaire."', 0)";
+                
+                if ($conn->query($sql) === TRUE) {
+                    header('Location: espace_Client.php');
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
             }
         }
     } else {

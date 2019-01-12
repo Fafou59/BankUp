@@ -63,7 +63,7 @@
                             <td><label>Adresse postale</label> :</td>
                             <td>
                                 <label for="numero_Voie">N° de voie</label> :
-                                <input type="text" name="numero_Voie" id="numero_Voie" size="5" minlength="0" maxlength="5" placeholder="Entrez votre n° voie" />
+                                <input type="number" name="numero_Voie" id="numero_Voie" min="0" max="99999" placeholder="Entrez votre n° voie" />
                             </td>
                         </tr>
                         <tr>
@@ -77,14 +77,14 @@
                             <td></td>
                             <td>    
                                 <label for="code_Postal">Code postal</label> :
-                                <input type="text" name="code_Postal" id="code_Postal" size="5" minlength="5" maxlength="5" placeholder="Entrez votre code postal" required />
+                                <input type="number" name="code_Postal" id="code_Postal" size="5" min="0" max="99999" placeholder="Entrez votre code postal" required />
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 <label for="ville">Ville</label> :
-                                <input type="text" name="ville" id="ville" size="10" minlength="5" maxlength="25" placeholder="Entrez votre ville" required />
+                                <input type="text" name="ville" id="ville" size="10" minlength="0" maxlength="25" placeholder="Entrez votre ville" required />
                             </td>
                         </tr>
     
@@ -95,7 +95,7 @@
                         </tr>
                         <tr>
                             <td><label for="telephone">Téléphone</label> :</td>
-                            <td><input type="text" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" required /></td>
+                            <td><input type="tel" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" required /></td>
                         </tr>
                         <tr>
                             <td><label for="mdp">Mot de passe</label> :</td>

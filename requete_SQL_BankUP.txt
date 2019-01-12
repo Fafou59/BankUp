@@ -45,7 +45,7 @@ VALUES ('Vintin', 'Ludovic', 'lvintin@bankup.fr', 0516283746, 'd9f0fc8309fe4293a
 CREATE TABLE client
 (
     id_Client INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-	civilite_Client ENUM('H', 'F', 'A') NOT NULL,
+    civilite_Client ENUM('H', 'F', 'A') NOT NULL,
     nom_Client VARCHAR(35) NOT NULL,
     prenom_Client VARCHAR(35) NOT NULL,
     date_Naissance_Client DATE NOT NULL,
@@ -78,13 +78,13 @@ CREATE TABLE compte
 
 CREATE TABLE beneficiaire
 (
+    id_Beneficiaire INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     id_Compte_Beneficiaire INT NOT NULL,
     id_Client_Emetteur INT NOT NULL,
     libelle_Beneficiaire VARCHAR(30),
     validite_Beneficiaire BOOLEAN NOT NULL,
     FOREIGN KEY (id_Compte_Beneficiaire) REFERENCES compte(id_Compte),
-    FOREIGN KEY (id_Client_Emetteur) REFERENCES client(id_Client),
-    PRIMARY KEY (id_Compte_Beneficiaire, id_Client_Emetteur)
+    FOREIGN KEY (id_Client_Emetteur) REFERENCES client(id_Client)
 )
 
 
@@ -111,17 +111,17 @@ CREATE TABLE cb
 
 CREATE TABLE operation
 (
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    date_Operation DATE NOT NULL,
-    id_Emetteur INT NOT NULL,
-    id_Recepteur INT,
-    type ENUM('CB', 'Virement', 'Chequier') NOT NULL,
-    montant_Debit INT,
-    montant_Credit INT,
-    id_CB INT,
-    id_Chequier INT,
-    FOREIGN KEY (id_Emetteur) REFERENCES compte(id),
-    FOREIGN KEY (id_Recepteur) REFERENCES compte(id),
-    FOREIGN KEY (id_CB) REFERENCES cb(id),
-    FOREIGN KEY (id_Chequier) REFERENCES chequier(id)
+    id_Operation INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    date_Operation DATETIME NOT NULL,
+    id_Emetteur_Operation INT,
+    id_Recepteur_Operation INT,
+    type_Operation ENUM('CB', 'Virement', 'Chequier') NOT NULL,
+    montant_Operation INT NOT NULL,
+    id_CB_Operation INT,
+    id_Chequier_Operation INT,
+    validite_Operation BOOLEAN NOT NULL,
+    FOREIGN KEY (id_Emetteur_Operation) REFERENCES compte(id_Compte),
+    FOREIGN KEY (id_Recepteur_Operation) REFERENCES compte(id_Compte),
+    FOREIGN KEY (id_CB_Operation) REFERENCES cb(id_Cb),
+    FOREIGN KEY (id_Chequier_Operation) REFERENCES chequier(id_Chequier)
 )

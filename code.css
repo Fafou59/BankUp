@@ -128,11 +128,6 @@ hr {
   display: table;
 }
 
-#check_icon { 
-  
-}
-
-
 
 /* Mise en page des boutons Valider/Annuler*/
 
@@ -171,7 +166,7 @@ background-color:#555;
 opacity:0.7;
 } 
 .bouton_Valider:hover {
-background-color #4CAF50; 
+background-color: #4CAF50; 
 opacity:0.7;
 } 
 .bouton_Connexion:hover {
@@ -328,7 +323,6 @@ img {vertical-align: middle;}
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
-</style>
 
 /*Mise en forme des Meet your team"*/
 
@@ -457,7 +451,7 @@ margin : 0px 0px 0px 0px;
 div#comptes.item_EC table {
   width: auto;
   margin-bottom : 20px;
-  margin top : 30px; 
+  margin-top: 30px; 
  }
 
 div#comptes.item_EC h3 {

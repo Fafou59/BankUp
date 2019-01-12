@@ -20,14 +20,11 @@
     if (isset($chequier)) {
         $sql1 = "UPDATE chequier SET validite_Chequier = 0 WHERE chequier.id_Compte_Rattache = ".$_POST['id_Compte'];
         $sql2 = "INSERT INTO chequier (id_Compte_Rattache, date_Emission_Chequier, validite_Chequier) VALUES ('".$_POST['id_Compte']."', NOW(), 1)";
-        if ($conn->query($sql1) === TRUE) {
-            if ($conn->query($sql2) === TRUE) {
-                header('Location: espace_Client.php');
-            } else {
-                echo "Error: " . $sql2 . "<br>" . $conn->error;
-            }
+        if ($conn->query($sql1) === TRUE AND ($conn->query($sql2) === TRUE)) {
+            header('Location: espace_Client.php');
         } else {
             echo "Error: " . $sql1 . "<br>" . $conn->error;
+            echo "Error: " . $sql2 . "<br>" . $conn->error;
         }
     } else {
         $sql = "INSERT INTO chequier (id_Compte_Rattache, date_Emission_Chequier, validite_Chequier)
