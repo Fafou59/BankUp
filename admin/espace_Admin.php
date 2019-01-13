@@ -29,6 +29,13 @@
     $requete->execute();
     $beneficiaires = $requete->get_result();
 
+    // Réaliser requête chèques
+    $requete = $conn->prepare("SELECT operation.*, chequier.* FROM operation, chequier WHERE operation.validite_Operation = 0 AND operation.id_Chequier_Operation = chequier.id_Chequier AND chequier.id_Chequier IN (SELECT chequier.id_Chequier FROM chequier, client, compte WHERE client.agence_Client = '".$_SESSION['admin_Agence']."' AND client.id_Client = compte.id_Detenteur_Compte AND chequier.id_Compte_Rattache = compte.id_Compte)");
+    $requete->execute();
+    $cheques = $requete->get_result();
+
+
+
 ?>
 
 <!DOCTYPE HTML>
@@ -46,8 +53,8 @@
         <div id="contenu">
             <button class="lienEC" onclick="openPage('clients', this, '#E80969')" id="defaultOpen">Liste des clients</button>
             <button class="lienEC" onclick="openPage('beneficiaires', this, '#E80969')" >Bénéficiaires à valider</button>
-            <button class="lienEC" onclick="openPage('operations', this, '#E80969')">Chèques à valider</button>
-            <button class="lienEC" onclick="openPage('comptes', this, '#E80969')">Vos bénéficiaires</button>
+            <button class="lienEC" onclick="openPage('cheques', this, '#E80969')">Chèques à valider</button>
+            <button class="lienEC" onclick="openPage('autorisations', this, '#E80969')">Autorisations découvert</button>
 
             <div id="clients" class="item_EC">
                 <h1>Les clients de votre agence</h1>
@@ -86,7 +93,7 @@
                         <th>Détenteur compte</th>
                         <th>Valider</th>
                         <th>Supprimer</th>
-                    <tr>
+                    </tr>
                     <?php
                     while($beneficiaire = $beneficiaires->fetch_row()) { ?>
                         <tr>
@@ -115,8 +122,55 @@
                             </form></td>
                         </tr>
                     <?php
-                    }
-                ?>
+                    } ?>
+                </table>
+            </div>
+
+            <div id="cheques" class="item_Ec">
+                <h1>Les chèques à valider</h1>
+                <p>Ci-dessous est affichée la liste des chèques en attente d'une validation.</p>
+                <hr>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>Client émetteur</th>
+                        <th>Compte bénéficiaire</th>
+                        <th>Détenteur compte</th>
+                        <th>Montant du chèque</th>
+                        <th>Valider</th>
+                        <th>Supprimer</th>
+                    <tr>
+                    <?php
+                    while($cheque = $cheques->fetch_row()) { ?>
+                        <tr>
+                            <td><?php
+                                $requete = $conn->prepare("SELECT client.prenom_Client, client. nom_Client FROM client, compte WHERE client.id_Client = compte.id_Detenteur_Compte AND compte.id_Compte = ".$cheque[2]);
+                                $requete->execute();
+                                $resultat = $requete->get_result();
+                                $emetteur_detail = $resultat->fetch_assoc();
+                                echo($emetteur_detail['prenom_Client'].' '.$emetteur_detail['nom_Client']); ?>
+                            </td>
+                            <td><?php 
+                                $requete = $conn->prepare("SELECT compte.*, client.* FROM compte, client WHERE compte.id_Compte = ".$cheque[3]." AND compte.id_Detenteur_Compte = client.id_Client");
+                                $requete->execute();
+                                $resultat = $requete->get_result();
+                                $beneficiaire_detail = $resultat->fetch_assoc();
+                                echo($beneficiaire_detail['libelle_Compte'].' - IBAN : '.$beneficiaire_detail['iban_Compte']); ?>
+                            </td>
+                            <td><?php
+                                echo($beneficiaire_detail['prenom_Client'].' '.$beneficiaire_detail['nom_Client']); ?></td>
+                            </td>
+                            <td><?php
+                                echo($cheque[5].'€');?>
+                            </td>
+                            <td><form method="post" action="cheque.php">
+                                <button name="id_Cheque_Ajout" type="submit" class="bouton_Ajout" value="<?php echo ($cheque[0]) ?>">Valider</button><br /><br />
+                            </form></td>
+                            <td><form method="post" action="cheque.php">
+                                <button name="id_Cheque_Suppression" type="submit" class="bouton_Suppression" value="<?php echo ($cheque[0]) ?>">Supprimer</button><br /><br />
+                            </form></td>                            
+                        </tr>
+                    <?php } ?>
+                </table>
             </div>
         </div>
 
