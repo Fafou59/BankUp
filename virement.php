@@ -58,7 +58,7 @@
     
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td><label for="emetteur">Sélectionnez votre compte :</label></td>
+                            <td><label for="emetteur">Sélectionnez le compte à débiter :</label></td>
                             <td><select name="emetteur" id="pays" required>
                             <?php
                                         while($compte2 = $comptes2->fetch_row())
