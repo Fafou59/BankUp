@@ -125,3 +125,6 @@ CREATE TABLE operation
     FOREIGN KEY (id_CB_Operation) REFERENCES cb(id_Cb),
     FOREIGN KEY (id_Chequier_Operation) REFERENCES chequier(id_Chequier)
 )
+
+INSERT INTO `operation`(`date_Operation`, `id_Emetteur_Operation`, `id_Recepteur_Operation`, `type_Operation`, `montant_Operation`, `id_Chequier_Operation`, `validite_Operation`)
+VALUES (SYSDATE(), 9, 15, 'Chequier', 123, 18, 0)

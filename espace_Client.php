@@ -1,45 +1,35 @@
 <?php
+    // Ajout du menu
     include('menu.php');
-    if ($_SESSION['connecte']!=1) {
-        header('Location: connexion.php');
-    }
+
+    // Vérifier si client connecté, sinon renvoie vers connexion
     if (!isset($_SESSION['id'])) {
         header("Location: connexion.php");
     }
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "bankup";
-    // Se connecter à la bdd
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Vérifier connexion
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    // Réaliser requête client
-    //$requete = $conn->prepare("SELECT client.*, agence.* FROM client, agence WHERE client.id_Client = '".$_SESSION['id']."' AND agence.id_Agence = client.id_Client");
-    $requete = $conn->prepare("SELECT client.* FROM client WHERE client.id_Client = '".$_SESSION['id']."'");
+    
+    include('connexion_bdd.php');
+    // Réaliser requête client & agence rattaché à l'id client
+    $requete = $conn->prepare("SELECT client.*, agence.* FROM client, agence WHERE client.id_Client = '".$_SESSION['id']."' AND agence.id_Agence = client.agence_Client");
     $requete->execute();
     $resultat = $requete->get_result();
     $client = $resultat->fetch_assoc();
-    //Réaliser requête agence
-    $requete = $conn->prepare("SELECT agence.* FROM agence, client WHERE client.agence_Client = agence.id_Agence");
-    $requete->execute();
-    $resultat = $requete->get_result();
-    $agence = $resultat->fetch_assoc();
-    // Réaliser requête compte
+
+    // Réaliser requête comptes rattachés au client
     $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_SESSION['id']."' = compte.id_Detenteur_Compte");
     $requete->execute();
     $resultat = $requete->get_result();
-    // Réaliser requête bénéficiaires
+
+    // Réaliser requête bénéficiaires rattachés au client
     $requete = $conn->prepare("SELECT beneficiaire.* FROM beneficiaire WHERE beneficiaire.id_Client_Emetteur = '".$_SESSION['id']."'");
     $requete->execute();
     $beneficiaires = $requete->get_result();
-    // Réaliser requête opérations emetteur
+
+    // Réaliser requête opérations débitrice du client
     $requete = $conn->prepare("SELECT operation.*, compte.* FROM operation, compte WHERE ((id_Compte = id_Emetteur_Operation) AND (operation.id_Emetteur_Operation IN (SELECT compte.id_Compte FROM compte WHERE compte.id_Detenteur_Compte = '".$_SESSION['id']."')))");
     $requete->execute();
     $operations_emetteur = $requete->get_result();
-    // Réaliser requête opérations récepteur
+
+    // Réaliser requête opérations créditrice du client
     $requete = $conn->prepare("SELECT operation.*, compte.* FROM operation, compte WHERE((id_Compte = id_Recepteur_Operation) AND (operation.id_Recepteur_Operation IN (SELECT compte.id_Compte FROM compte WHERE compte.id_Detenteur_Compte = '".$_SESSION['id']."')))");
     $requete->execute();
     $operations_recepteur = $requete->get_result();
@@ -151,20 +141,20 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>   
                         <td><label for="nom">nom de l'agence</label> :</td>
-                        <td id="infos"><?php echo ("BankUP ".$agence['ville_Agence']) ?></td>   
+                        <td id="infos"><?php echo ("BankUP ".$client['ville_Agence']) ?></td>   
                     </tr>
                     <tr>
                         <td><label>adresse postale de l'agence</label> :</td>
                         <td>
                             <label for="numero_Voie"></label>
-                            <div id="infos"><?php echo ($agence['num_Voie_Agence']." ".$agence['voie_Agence'])?></div>
+                            <div id="infos"><?php echo ($client['num_Voie_Agence']." ".$client['voie_Agence'])?></div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
                             <label for="voie"></label>
-                            <div id="infos"><?php echo ($agence['code_Postal_Agence']." ".$agence['ville_Agence']) ?></div>
+                            <div id="infos"><?php echo ($client['code_Postal_Agence']." ".$client['ville_Agence']) ?></div>
                         </td>
                     </tr>
                 </table>
@@ -293,10 +283,6 @@
             <?php } ?>
             </table>
         </div>
-        <script>
-            document.addEventListener("load", sortTable(0));
-            document.addEventListener("load", sortTable(0));
-        </script>
 
         <div id="beneficiaires" class="item_EC">
             <h1>Vos bénéficiaires</h1>
@@ -358,5 +344,11 @@
     <footer>
         <div></div>
     </footer>
+
+    <script>
+        document.addEventListener("load", sortTable(0));
+        document.addEventListener("load", sortTable(0));
+        document.getElementById("defaultOpen").click();
+    </script>
 
 </html>
