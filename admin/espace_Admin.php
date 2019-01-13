@@ -59,25 +59,34 @@
             <div id="clients" class="item_EC">
                 <h1>Les clients de votre agence</h1>
                 <p>
-                    Tous les clients de votre agence sont affichés ci-dessous.<br />
-                    Vous pouvez également créer un nouveau client.
+                    Tous les clients de votre agence sont affichés ci-dessous. Vous pouvez également créer un nouveau client.
                     <button type="submit" class="bouton_Valider" onclick="location.href='inscription_Admin.php'">Créer un client</button>
                     <hr>
                 </p>
                 <div class="container">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <?php 
+                        <tr>
+                            <th>N°</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Adresse mail</th>
+                            <th>Accéder au profil</th>
+                        </tr>
+                        <?php 
                         $i = 1;
-                        echo("<tr><td>N°</td><td>Prénom</td><td>Nom</td><td>Adresse mail</td><td>Accéder au profil</td></tr>");
-                        while($client = $clients->fetch_row()) {
-                            echo("<tr><td>".$i."</td><td>".$client[3]."</td><td>".$client[2]."</td><td>".$client[6]."</td>"); ?>
-                            <td><form method="post" action="mirroring_Admin.php">
-                                <button name="id_Client" type="submit" class="bouton_Profil" value="<?php echo ($client[0]) ?>">Profil</button><br /><br />
-                            </form></td></tr>
+                        while($client = $clients->fetch_row()) { ?>
+                            <tr>
+                                <td><?php echo($i)?></td>
+                                <td><?php echo($client[3])?></td>
+                                <td><?php echo($client[2])?></td>
+                                <td><?php echo($client[6])?></td>
+                                <td><form method="post" action="mirroring_Admin.php">
+                                    <button name="id_Client" type="submit" class="bouton_Profil" value="<?php echo ($client[0]) ?>">Profil</button>
+                                </form></td>
+                            </tr>
                             <?php
                             $i = $i + 1;
-                        }
-                    ?>
+                        } ?>
                     </table>
                 </div>
             </div>
@@ -112,21 +121,20 @@
                                 echo($beneficiaire_detail['libelle_Compte'].' - IBAN : '.$beneficiaire_detail['iban_Compte']); ?>
                             </td>
                             <td><?php
-                                echo($beneficiaire_detail['prenom_Client'].' '.$beneficiaire_detail['nom_Client']); ?></td>
+                                echo($beneficiaire_detail['prenom_Client'].' '.$beneficiaire_detail['nom_Client']); ?>
                             </td>
                             <td><form method="post" action="validation_Beneficiaire.php">
-                                <button name="id_Beneficiaire" type="submit" class="bouton_Ajout" value="<?php echo ($beneficiaire[0]) ?>">Valider</button><br /><br />
+                                <button name="id_Beneficiaire" type="submit" class="bouton_Ajout" value="<?php echo ($beneficiaire[0]) ?>">Valider</button>
                             </form></td>
                             <td><form method="post" action="suppression_Beneficiaire.php">
-                                <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
+                                <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button>
                             </form></td>
                         </tr>
-                    <?php
-                    } ?>
+                    <?php } ?>
                 </table>
             </div>
 
-            <div id="cheques" class="item_Ec">
+            <div id="cheques" class="item_EC">
                 <h1>Les chèques à valider</h1>
                 <p>Ci-dessous est affichée la liste des chèques en attente d'une validation.</p>
                 <hr>
@@ -157,20 +165,27 @@
                                 echo($beneficiaire_detail['libelle_Compte'].' - IBAN : '.$beneficiaire_detail['iban_Compte']); ?>
                             </td>
                             <td><?php
-                                echo($beneficiaire_detail['prenom_Client'].' '.$beneficiaire_detail['nom_Client']); ?></td>
+                                echo($beneficiaire_detail['prenom_Client'].' '.$beneficiaire_detail['nom_Client']); ?>
                             </td>
                             <td><?php
                                 echo($cheque[5].'€');?>
                             </td>
                             <td><form method="post" action="cheque.php">
-                                <button name="id_Cheque_Ajout" type="submit" class="bouton_Ajout" value="<?php echo ($cheque[0]) ?>">Valider</button><br /><br />
+                                <button name="id_Cheque_Ajout" type="submit" class="bouton_Ajout" value="<?php echo ($cheque[0]) ?>">Valider</button>
                             </form></td>
                             <td><form method="post" action="cheque.php">
-                                <button name="id_Cheque_Suppression" type="submit" class="bouton_Suppression" value="<?php echo ($cheque[0]) ?>">Supprimer</button><br /><br />
+                                <button name="id_Cheque_Suppression" type="submit" class="bouton_Suppression" value="<?php echo ($cheque[0]) ?>">Supprimer</button>
                             </form></td>                            
                         </tr>
                     <?php } ?>
                 </table>
+            </div>
+
+            <div id="autorisations" class="item_EC">
+                <h1>Autorisations de découvert</h1>
+                <p>Vous pouvez paramétrer les autorisations de découvert des comptes des clients de votre agence.</p>
+                <hr>
+
             </div>
         </div>
 
@@ -180,5 +195,9 @@
     <footer>
         <div></div>
     </footer>
+
+    <script>
+        document.getElementById("defaultOpen").click();
+    </script>
 
 </html>

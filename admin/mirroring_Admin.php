@@ -7,12 +7,12 @@
         header("Location: connexion_Admin.php");
     }
 
-    if (!isset($_POST['id_Client'])) {
+    if (isset($_POST['id_Client'])) {
+        $_SESSION['id_Client_Admin'] = $_POST['id_Client'];
+    } else {
         if (!isset($_SESSION['id_Client_Admin'])) {
             header("Location: espace_Admin.php");
         }
-    } else {
-        $_SESSION['id_Client_Admin'] = $_POST['id_Client'];
     }
 
     $servername = "localhost";
@@ -256,16 +256,16 @@
                     $i = 1;
                     echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</td><td>Supprimer</td></tr>");
                     while($beneficiaire = $resultat3->fetch_row()) {
-                        if ($beneficiaire[3]==1) {
-                            echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>Actif</td>"); ?>
-                            <td><form method="post" action="virement.php">
+                        if ($beneficiaire[4]==1) {
+                            echo("<tr><td>".$i."</td><td>".$beneficiaire[3]."</td><td>Actif</td>"); ?>
+                            <td><form method="post" action="virement_Admin.php">
                                 <button name="id_Beneficiaire" type="submit" class="bouton_Virement" value="<?php echo ($beneficiaire[0]) ?>">Faire virement</button><br /><br />
                             </form></td>
                             <td><form method="post" action="suppression_Beneficiaire.php">
                                 <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
                             </form></td></tr>
                         <?php } else {
-                            echo("<tr><td>".$i."</td><td>".$beneficiaire[2]."</td><td>En attente</td><td></td>"); ?>
+                            echo("<tr><td>".$i."</td><td>".$beneficiaire[3]."</td><td>En attente</td><td></td>"); ?>
                             <td><form method="post" action="suppression_Beneficiaire.php">
                                 <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
                             </form></td></tr>

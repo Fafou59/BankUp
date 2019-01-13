@@ -14,7 +14,7 @@
     // Opérations sur compte si chèque validé
     if (isset($_POST['id_Cheque_Ajout'])) {
         // Réaliser requête chèques
-        $requete = $conn->prepare("SELECT operation.* FROM operation WHERE operation.id_Chequier_Operation = '".$_POST['id_Cheque_Ajout']."'");
+        $requete = $conn->prepare("SELECT operation.* FROM operation WHERE operation.id_Operation = '".$_POST['id_Cheque_Ajout']."'");
         $requete->execute();
         $resultat = $requete->get_result();
         $cheque = $resultat->fetch_assoc();
@@ -32,7 +32,7 @@
             echo "Error: " . $sql2 . "<br>" . $conn->error;
         }
     } else { // Suppression de l'opération si chèque refusé
-        if (isset($_POST['id_Cheque_Suppresion'])) {
+        if (isset($_POST['id_Cheque_Suppression'])) {
             $sql = "DELETE FROM operation WHERE operation.id_Operation = '".$_POST['id_Cheque_Suppression']."'";
             if ($conn->query($sql) === TRUE) { 
                 header('Location: espace_Admin.php');

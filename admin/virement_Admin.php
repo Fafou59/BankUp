@@ -53,7 +53,7 @@
     <body>
         <?php
             if ((!isset($_POST["emetteur"], $_POST['recepteur'], $_POST['montant']))) { ?>
-                <form class="formulaire" method="post" action="virement.php" style="border:1px solid #ccc">
+                <form class="formulaire" method="post" action="virement_Admin.php" style="border:1px solid #ccc">
                 <div class="container">
                     <h1>Faire un virement</h1>
                     <p>Merci de compléter les informations ci-dessous pour réaliser votre virement.</p>
@@ -85,7 +85,7 @@
                                     echo("</optgroup><optgroup label='Vos bénéficiaires'>");
                                     while($beneficiaire = $beneficiaires->fetch_row())
                                     {
-                                        if ($beneficiaire[1]==$id_Beneficiaire) { // Bénéficiaire sélectionné par défaut
+                                        if ($beneficiaire[0]==$id_Beneficiaire) { // Bénéficiaire sélectionné par défaut
                                             echo('<option value='.$beneficiaire[5].' selected="selected">'.$beneficiaire[3].' - IBAN : '.$beneficiaire[10].'</option>');
                                         } else {
                                             echo('<option value='.$beneficiaire[5].'>'.$beneficiaire[3].' - IBAN : '.$beneficiaire[10].'</option>');
