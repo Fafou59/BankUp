@@ -18,18 +18,18 @@
         <div id="contenu">
         <?php
             // Si identifiant (email) et mdp du visiteur renseignés
-            if (isset($_POST["identifiant"]) AND isset($_POST["mdp"])) {
+            if (isset($_POST["identifiant"], $_POST["mdp"])) {
                 include('support/connexion_bdd.php');
 
                 // Réaliser requête client
                 $requete = $conn->prepare("SELECT id_Client, adresse_Mail_Client, mdp_Client FROM client WHERE adresse_Mail_Client = '".$_POST["identifiant"]."'");
                 $requete->execute();
                 $resultat = $requete->get_result();
-                $association = $resultat->fetch_assoc();
+                $client = $resultat->fetch_assoc();
 
                 // Vérifier si mdp correct
-                if ($association['mdp_Client']==sha1($_POST['mdp'])) {
-                    $_SESSION['id'] = $association['id_Client'];
+                if ($client['mdp_Client']==sha1($_POST['mdp'])) {
+                    $_SESSION['id'] = $client['id_Client'];
                     header("Location: espace_Client.php");
 
                 //Si mdp incorrect
