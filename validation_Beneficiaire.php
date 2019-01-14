@@ -12,7 +12,7 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "DELETE FROM beneficiaire WHERE beneficiaire.id_Beneficiaire = '".$_POST['id_Beneficiaire']."'";
+        $sql = "UPDATE beneficiaire SET beneficiaire.validite_Beneficiaire = 1 WHERE beneficiaire.id_Beneficiaire = '".$_POST['id_Beneficiaire']."'";
 
         if ($conn->query($sql) === TRUE) { 
             header('Location: espace_Admin.php');

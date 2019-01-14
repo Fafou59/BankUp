@@ -440,8 +440,19 @@ input[type=textsearch]:focus {
 
 /*input[type="textsearch"]::placeholder{color: red;}*/
 
+div#comptes.item_EC {
+display: none;
+padding: 10px 20px;
+height: 250%;
+background-color: white;
+margin-left:10%; 
+margin-right:10%; 
+margin-top: 100px;
+margin-bottom: 50px; 
+align-content: center;
+}
 
-.item_EC {
+div#operations.item_EC {
   display: none;
   padding: 10px 20px;
   height: 250%;
@@ -452,6 +463,18 @@ input[type=textsearch]:focus {
   margin-bottom: 50px; 
   align-content: center;
   }
+
+  div#beneficiaires.item_EC {
+    display: none;
+    padding: 10px 20px;
+    height: 250%;
+    background-color: white;
+    margin-left:10%; 
+    margin-right:10%; 
+    margin-top: 100px;
+    margin-bottom: 50px; 
+    align-content: center;
+    }
 
 div#comptes.item_EC td {
 width: auto;
@@ -487,20 +510,20 @@ div#comptes.item_EC h3 {
 
 
 
-.bouton_Ouvrir {
-  border-radius: 0px;
-  width: 200px;
-  height: 50px;
-  font-size:90%; 
-  float:left; 
-  font-variant: small-caps;
-  background-color: #4CAF50;
-  margin-left: 5px;
-  color: white;
-  cursor: pointer;
-  border: none;
-  outline: 0;
-  }
+  .bouton_Ouvrir {
+    border-radius: 0px;
+    width: 200px;
+    height: 50px;
+    font-size:90%; 
+    float:left; 
+    font-variant: small-caps;
+    background-color: #4CAF50;
+    margin-left: 5px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: 0;
+    }
     
   div#informations.item_EC table {
     margin-top:20px;
