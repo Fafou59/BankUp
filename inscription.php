@@ -4,7 +4,7 @@
         header("Location: espace_Client.php");
     }
     // Ajout du menu
-    include('menu.php');
+    include('support/menu.php');
 ?>
 
 <!DOCTYPE HTML>
@@ -149,7 +149,7 @@
   				        <table>
                             <tr>
                                 <td>
-                                    <img id="ckeck_icon" src="check icon.png" style="width: 60px; margin-left: 30px; margin-right: 30px;">
+                                    <img id="ckeck_icon" src="images/bouton_Ok.png" style="width: 60px; margin-left: 30px; margin-right: 30px;">
                                 </td>
                                 <td>
                                     <h1 style="font-variant: small-caps;">Votre profil a bien été créé.</h1>

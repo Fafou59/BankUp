@@ -1,6 +1,6 @@
 <?php
     // Ajout du menu
-    include('menu.php');
+    include('support/menu.php');
 ?>
 
 <!DOCTYPE HTML>
@@ -13,13 +13,13 @@
     <body>
         <div class="slideshow-container" style="margin-left:5px; margin-right:5px;">
             <div class="mySlides fade">
-                <img src="img1.jpg" style="width:100%">
+                <img src="images/img1.jpg" style="width:100%">
             </div>
             <div class="mySlides fade">
-                <img src="img2.jpg" style="width:100%">
+                <img src="images/img2.jpg" style="width:100%">
             </div>
             <div class="mySlides fade">
-                <img src="img3.jpg" style="width:100%">
+                <img src="images/img3.jpg" style="width:100%">
             </div>
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -32,7 +32,7 @@
         <div class="row">
             <div class="columnfabien">
                 <div class="card">
-                    <img src="fabien.jpg" alt="Fabien" style="width:100%">
+                    <img src="images/fabien.jpg" alt="Fabien" style="width:100%">
                     <div class="container">
                         <h2>Fabien Lesage</h2>
                         <p><button class="button">Contact</button></p>
@@ -41,7 +41,7 @@
             </div>
             <div class="columnlisa">
                 <div class="card">
-                    <img src="Lisa.jpg" alt="Lisa" style="width:100%">
+                    <img src="images/Lisa.jpg" alt="Lisa" style="width:100%">
                     <div class="container">
                         <h2>Lisa Mossion</h2>
                         <p><button class="button">Contact</button></p>
