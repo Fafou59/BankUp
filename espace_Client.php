@@ -161,8 +161,8 @@
             </div>
         </div>
 
-        <div id="comptes" class="item_EC">
-            <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos comptes</h1>
+                <div id="comptes" class="item_EC">
+            <h1 style="font-variant: small-caps;">vos comptes</h1>
             <p style="font-size: 15px">Vous pouvez consulter ci-dessous vos comptes. Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
             <hr>
             <button type="submit" class="bouton_Ouvrir" onclick="location.href='ouvrir_Compte.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Ouvrir un compte</button><br /><br />
@@ -172,7 +172,7 @@
                 $i = 1;
                 while($compte = $resultat->fetch_row())  {
                     ?>
-                    <table class="onglet_compte" style="background-color: #E80969; width:100%;"><tr><td style="color: white; padding-left:5px; padding-right:5px; width: 8%;"><h3>compte</h3></td><td style="color: white; width:30%"><h3><?php echo $compte[4]?></h3></td><td style="color: white; padding-right:5px; width: 45%;text-align:right;font-weight: normal; font-variant: small-caps;">solde</td><td style="color: white;text-align:left;font-weight: normal; font-variant: small-caps; padding-left:5px"><?php echo $compte[3]?> €</td><td style="width:10%"><button type="submit" class="bouton_Compte" onclick="toggle_div(this,<?php echo $i;?>);"><img src="angle-arrow-down.png" style="width:25px"></button></td></tr></table>
+                    <table class="onglet_compte" style="background-color: #E80969; width:100%;"><tr><td style="color: white; padding-left:5px; padding-right:5px; width: 8%;"><h3>COMPTE</h3></td><td style="color: white; width:30%"><h3><?php echo $compte[4]?></h3></td><td style="color: white; padding-right:5px; width: 45%;text-align:right;font-weight: normal; font-variant: small-caps;">solde</td><td style="color: white;text-align:left;font-weight: normal; font-variant: small-caps; padding-left:5px"><?php echo $compte[3]?> €</td><td style="width:10%"><button type="submit" class="bouton_Compte" onclick="toggle_div(this,<?php echo $i;?>);"><img src="angle-arrow-down.png" style="width:25px"></button></td></tr></table>
                     
                     <div id=<?php echo $i;?> style="display:none;"><table style="margin-left:30px;"><tr><td><p><h3>type de compte</p></td><td style="text-transform: capitalize; padding-left:40px;"><?php echo $compte[2]?></td></tr><tr><td><p><h3>date ouverture</p></td><td style="padding-left:40px;"><?php echo $compte[1]?></td></tr><tr><td><p><h3>iban</p></td><td style="padding-left:40px;"><?php echo $compte[5]?></td></tr><tr><td><p><h3>bic</p></td><td style="padding-left:40px;"><?php echo $compte[6]?></td></tr><tr><td><p><h3>autorisation découvert</p></td><td style="padding-left:40px;"><?php echo $compte[7]?> €</td></tr></table><?php
 
@@ -195,11 +195,11 @@
                             ?> <table class="onglet_Paiement"><tr><td style="color: white; padding-left:5px; padding-right:5px; width: 300px;"><h3>carte associée</h3></td><td><button type="submit" class="bouton_Mini_Compte" style="background-color: #555;" onclick="toggle_div(this,<?php echo $random_number;?>);"><img src="angle-arrow-down.png" style="width:25px; float:right;"></button></td></tr></table>
                             <div id="<?php echo $random_number;?>" style="display:none;"><table style="margin-top:0px; margin-left: 30px;"><tr><td><h3>numéro de carte</td><td style="text-transform: capitalize; padding-left:40px;"><?php echo $cb['num_Cb']?></td></tr><tr><td><p><h3>cryptogramme</p></td><td style="padding-left:40px;"><?php echo $cb['cryptogramme_Cb']?></td></tr><tr><td><p><h3>date d'expiration</p></td><td style="padding-left:40px;"><?php echo $cb['date_Expiration_Cb'] ?></td></tr></table></div>
                         <?php } else {
-                            ?>
-                            <p>Vous n'avez pas encore de carte.<p>
-                            <form method="post" action="creation_Cb.php">
-                                <button name="id_Compte" type="submit" class="bouton_Ouvrir" value="<?php echo ($compte[0]) ?>"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Demander une carte</button><br /><br />
-                            </form>
+                            ?> <table>
+                            <tr><p style="padding-left:30px; padding-bottom:10px;">Vous n'avez pas encore de carte.</p>
+                            </tr><tr><form method="post" action="creation_Cb.php">
+                                <button name="id_Compte" type="submit" class="bouton_Ouvrir" style="padding-left: 15px;margin-left: 30px; text-align:left;" value="<?php echo ($compte[0]) ?>"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Nouvelle carte</button><br /><br />
+                            </form></tr></table>
                         <?php }
                         ?></tr>
                         <?php
@@ -220,11 +220,11 @@
                                 <button name="id_Compte" type="submit" class="bouton_Ouvrir" style="padding-left: 15px; margin-left: 30px;text-align:left;" value="<?php echo ($compte[0]) ?>"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">nouveau chéquier</button><br /><br />
                             </form></div>
                         <?php } else {
-                            ?>
-                            <p>Vous n'avez pas encore de chéquier.<p>
-                            <form method="post" action="creation_Chequier.php" style="height:80px">
+                            ?><table style="padding-top:25px;">
+                            <tr><p style="padding-left:30px; padding-bottom:10px;">Vous n'avez pas encore de chéquier.</p>
+                            </tr><tr><form method="post" action="creation_Chequier.php" style="height:80px">
                                 <button name="id_Compte" type="submit" class="bouton_Ouvrir" style="padding-left: 15px;margin-left: 30px; text-align:left;" value="<?php echo ($compte[0]) ?>"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">nouveau chéquier</button><br /><br />
-                            </form>
+                            </form></tr></table>
                         <?php }
                         ?> </tr></table>
                         <?php
@@ -251,11 +251,13 @@
         </div>
 
         <div id="operations" class="item_EC">
-            <h1>Vos opérations</h1>
-            <p>Retrouvez la liste de vos opérations passées. Vous pouvez également faire un virement un cliquant sur le bouton correspondant.</p>
-            <button type="submit" class="bouton_Valider" onclick="location.href='virement.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Faire un virement</button><br /><br />
+            <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos opérations</h1>
+            <p style="font-size: 15px">Retrouvez la liste de vos opérations passées. Vous pouvez également faire un virement un cliquant sur le bouton correspondant.</p>
             <hr>
-            <table id='liste_Operations' width="100%" border="0" cellspacing="0" cellpadding="0">
+            <button type="submit" class="bouton_Ouvrir" onclick="location.href='virement.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Faire un virement</button><br><br>
+            <br>
+            <hr>
+                    <table id='liste_Operations' width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <th onclick="sortTable(0)">Date</th>
                     <th onclick="sortTable(1)">Type opération</th>
@@ -268,7 +270,7 @@
                     <td><?php echo($operation[1]) ?></td>
                     <td><?php echo($operation[4]) ?></td>
                     <td><?php echo($operation[13]) ?></td>
-                    <td><?php echo('<font color="red">-'.$operation[5].'€</font>') ?></td>
+                    <td style="font-weight:bold"><?php echo('<font color="red">-'.$operation[5].'€</font>') ?></td>
                     <td><?php if ($operation[8]==1) {echo('Effectué');} else {echo('En attente de validation');}?>
                 </tr>
             <?php }
@@ -277,13 +279,13 @@
                     <td><?php echo($operation[1]) ?></td>
                     <td><?php echo($operation[4]) ?></td>
                     <td><?php echo($operation[13]) ?></td>
-                    <td><?php echo('<font color="green">+'.$operation[5].'€</font>') ?></td>
+                    <td style="font-weight:bold"><?php echo('<font color="green">+'.$operation[5].'€</font>') ?></td>
                     <td><?php if ($operation[8]==1) {echo('Effectué');} else {echo('En attente de validation');}?>
                 </tr>
             <?php } ?>
             </table>
         </div>
-
+    
         <div id="beneficiaires" class="item_EC">
             <h1>Vos bénéficiaires</h1>
             <p>
