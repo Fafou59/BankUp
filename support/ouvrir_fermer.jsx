@@ -8,3 +8,4 @@ function toggle_div(bouton, id) { // On déclare la fonction toggle_div qui pren
         bouton.innerHTML = "<img src=\"images/angle-arrow-down.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
     }
 }
+

@@ -4,11 +4,11 @@
     <hr>
     <table>
         <tr>
-            <table class="onglet_Beneficiaire" style="background-color: #E80969">
-                <tr>
-                    <td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">ajouter un beneficiaire</h3></td>
-                    <td><button type="submit" class="bouton_Beneficiaire" style="background-color: #E80969" onclick="toggle_div(this,'ajout_beneficiaire');"><img src="images/angle-arrow-down.png" style="width:25px"></button></td>
-                </tr>
+            <table class="onglet_Beneficiaire1">
+                <tr>   
+                <td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">ajouter un beneficiaire</h3></td>     
+                <td><button type="submit" class="bouton_Beneficiaire" style="background-color: #4caf50" onclick="toggle_div(this,'ajout_beneficiaire');"><img src="images/angle-arrow-down.png" style="width:25px"></button></td>
+            </tr>
             </table>
             <div id='ajout_beneficiaire' style="display:none;">
                 <p style="font-size: 15px">Merci de compléter les informations ci-dessous pour ajouter un bénéficiaire.</p>
@@ -33,7 +33,7 @@
         </tr>
         <br><hr><br>
         <tr>
-            <table class="onglet_Beneficiaire">
+            <table class="onglet_Beneficiaire" style="margin-bottom:50px;">
                 <tr>
                     <td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">vos bénéficiares enregistrés</h3></td>
                     <td><button type="submit" class="bouton_Beneficiaire" onclick="toggle_div(this,'liste_Beneficiaire');"><img src="images/angle-arrow-down.png" style="width:25px"></button></td>

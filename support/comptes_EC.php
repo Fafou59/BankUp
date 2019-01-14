@@ -1,17 +1,17 @@
 <div id="comptes" class="item_EC">
     <h1 style="font-variant: small-caps;">vos comptes</h1>
-    <p style="font-size: 15px">Vous pouvez consulter ci-dessous vos comptes. Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
+    <p style="font-size: 15px; margin-top: 15px;margin-bottom: 15px;">Vous pouvez consulter ci-dessous vos comptes. Vous pouvez également ouvrir un compte en cliquant sur le bouton situé en bas de la page.</p>
     <hr>
     <button type="submit" class="bouton_Ouvrir" onclick="location.href='ouvrir_Compte.php'"><img src="images/add-plus-button.png" style="width:25px; margin-right:20px;">Ouvrir un compte</button><br><br><br>
     <hr>
     <?php 
         $i = 1;
         while($compte = $resultat->fetch_row())  { ?>
-            <table class="onglet_compte" style="background-color: #E80969; width:100%;">
+            <table class="onglet_compte" style="background-color: #E80969; width:100%; margin-bottom:50px;">
                 <tr>
-                    <td style="color: white; padding-left:5px; padding-right:5px; width: 8%;"><h3>COMPTE</h3></td>
+                    <td style="color: white; padding-left:5px; padding-right:5px; width: 8%;"><h3>compte</h3></td>
                     <td style="color: white; width:30%"><h3><?php echo $compte[4]?></h3></td>
-                    <td style="color: white; padding-right:5px; width: 45%;text-align:right;font-weight: normal; font-variant: small-caps;">solde</td>
+                    <td style="color: white; padding-right:5px; width: 39%;text-align:right;font-weight: normal; font-variant: small-caps;">solde</td>
                     <td style="color: white;text-align:left;font-weight: normal; font-variant: small-caps; padding-left:5px"><?php echo $compte[3]?> €</td>
                     <td style="width:10%"><button type="submit" class="bouton_Compte" onclick="toggle_div(this,<?php echo $i;?>);"><img src="images/angle-arrow-down.png" style="width:25px"></button></td>
                 </tr>

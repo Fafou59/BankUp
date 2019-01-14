@@ -1,10 +1,9 @@
 <div id="informations" class="item_EC">
     <div class="container">
-        <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos informations</h1>
+        <h1 style="font-variant: small-caps;">vos informations</h1>
         <p style="font-size: 15px">Vous pouvez modifier vos informations. N'oubliez pas de valider.</p>
         <hr>
         <form method="post" action="modif_Infos.php" >
-            <button type="submit" class="bouton_Valider"><img src="images/pencil.png" style="width:25px; margin-right:20px;">Modifier</button>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td><label>civilité</label> :</td>
@@ -64,9 +63,11 @@
                     <td><label for="telephone">téléphone</label> :</td>
                     <td><input type="text" name="telephone" id="telephone" size="10" minlength="10" maxlength="10" placeholder="Entrez votre numéro de téléphone" value="<?php echo ($client['telephone_Client']) ?>" /></td>
                 </tr>
-            </table><br />
-        </form>
-        <br /><hr>
+            </table><br>
+        <button type="submit" class="bouton_Valider"><img src="images/pencil.png" style="width:25px; margin-right:20px;">Valider les modifications</button>
+    <br>    
+    </form>
+        <br><br><hr>
         <h1 style="font-variant: small-caps; margin-bottom: 0px;">votre agence</h1>
         <p>Vous trouverez ci-dessous les informations sur votre agence de rattachement.</p>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
