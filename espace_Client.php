@@ -7,7 +7,7 @@
         header("Location: connexion.php");
     }
     
-    include('connexion_bdd.php');
+    include('support/connexion_bdd.php');
     // Réaliser requête client & agence rattaché à l'id client
     $requete = $conn->prepare("SELECT client.*, agence.* FROM client, agence WHERE client.id_Client = '".$_SESSION['id']."' AND agence.id_Agence = client.agence_Client");
     $requete->execute();
@@ -62,7 +62,7 @@
                 <p style="font-size: 15px">Vous pouvez modifier vos informations. N'oubliez pas de valider.</p>
                 <hr>
                 <form method="post" action="modif_Infos.php" >
-                    <button type="submit" class="bouton_Valider"><img src="pencil.png" style="width:25px; margin-right:20px;">Modifier</button>
+                    <button type="submit" class="bouton_Valider"><img src="images/pencil.png" style="width:25px; margin-right:20px;">Modifier</button>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td><label>civilité</label> :</td>
@@ -288,7 +288,7 @@
                     var div = document.getElementById(id); // On récupère le div ciblé grâce à l'id
                     if(div.style.display=="none") { // Si le div est masqué...
                         div.style.display = "block"; // ... on l'affiche...
-                        bouton.innerHTML = "<img src=\"up-arrow.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
+                        bouton.innerHTML = "<img src=\"images/up-arrow.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
                     } else { // S'il est visible...
                         div.style.display = "none"; // ... on le masque...
                         bouton.innerHTML = "<img src=\"images/angle-arrow-down.png\" width=\"25px\" margin-right=\"20px\">"; // ... et on change le contenu du bouton.
@@ -301,7 +301,7 @@
             <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos opérations</h1>
             <p style="font-size: 15px">Retrouvez la liste de vos opérations passées. Vous pouvez également faire un virement un cliquant sur le bouton correspondant.</p>
             <hr>
-            <button type="submit" class="bouton_Ouvrir" onclick="location.href='virement.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Faire un virement</button><br><br>
+            <button type="submit" class="bouton_Ouvrir" onclick="location.href='virement.php'"><img src="images/add-plus-button.png" style="width:25px; margin-right:20px;">Faire un virement</button><br><br>
             <br>
             <hr>
                     <table id='liste_Operations' width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -340,7 +340,7 @@
             </p>
             <hr>
             <table><tr>
-            <table class="onglet_Beneficiaire" style="background-color: #E80969"><tr><td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">ajouter un beneficiaire</h3></td><td><button type="submit" class="bouton_Beneficiaire" style="background-color: #E80969" onclick="toggle_div(this,'ajout_beneficiaire');"><img src="angle-arrow-down.png" style="width:25px"></button></td></tr></table>
+            <table class="onglet_Beneficiaire" style="background-color: #E80969"><tr><td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">ajouter un beneficiaire</h3></td><td><button type="submit" class="bouton_Beneficiaire" style="background-color: #E80969" onclick="toggle_div(this,'ajout_beneficiaire');"><img src="images/angle-arrow-down.png" style="width:25px"></button></td></tr></table>
                     
             <div id='ajout_beneficiaire' style="display:none;">
             <p style="font-size: 15px">Merci de compléter les informations ci-dessous pour ajouter un bénéficiaire.</p>
@@ -358,7 +358,7 @@
                     </table>
                 </div>
                 <div class="bouton_Form">
-                        <button type="submit" class="bouton_Ouvrir"> <img src="add-plus-button.png" style="width:25px; margin-right:20px;"> Ajouter</button>
+                        <button type="submit" class="bouton_Ouvrir"> <img src="images/add-plus-button.png" style="width:25px; margin-right:20px;"> Ajouter</button>
                 </div>
             </form>
             </p>
@@ -367,7 +367,7 @@
             <br>
             <hr>
             <br>
-            <tr><table class="onglet_Beneficiaire"><tr><td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">vos bénéficiares enregistrés</h3></td><td><button type="submit" class="bouton_Beneficiaire" onclick="toggle_div(this,'liste_Beneficiaire');"><img src="angle-arrow-down.png" style="width:25px"></button></td></tr></table>
+            <tr><table class="onglet_Beneficiaire"><tr><td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">vos bénéficiares enregistrés</h3></td><td><button type="submit" class="bouton_Beneficiaire" onclick="toggle_div(this,'liste_Beneficiaire');"><img src="images/angle-arrow-down.png" style="width:25px"></button></td></tr></table>
                     
             <div id='liste_Beneficiaire' style="display:none;">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -386,7 +386,7 @@
                     <?php } else {
                         ?><tr><td style="width:15%"><?php echo($i) ?></td><td style="width:35%"> <?php echo($beneficiaire[3]) ?></td><td style="width:20%">En attente</td><td style="width:20%"></td>
                         <td style="width:10%"><form method="post" action="suppression_Beneficiaire.php" style="height: 40px;">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>"><img src="bin.png" style="width:25px; margin-right:20px;"></button><br /><br />
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>"><img src="images/bin.png" style="width:25px; margin-right:20px;"></button><br /><br />
                         </form></td></tr>
                     <?php }
                     $i = $i + 1;

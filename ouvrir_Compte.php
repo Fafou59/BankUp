@@ -1,6 +1,6 @@
 <?php
     // Ajout du menu
-    include('menu.php');
+    include('support/menu.php');
 
     // Vérifier si client connecté, sinon renvoie vers connexion
     if (!isset($_SESSION['id'])) {
@@ -65,7 +65,7 @@
                 $autorisation_Decouvert = 0;
 
                 // COnnexion à bdd
-                include('connexion_bdd.php');
+                include('support/connexion_bdd.php');
 
                 // Requête ajout du compte
                 $sql = "INSERT INTO compte (date_Ouverture_Compte, type_Compte, solde_Compte, libelle_Compte, iban_Compte, bic_Compte, autorisation_Decouvert_Compte, id_Detenteur_Compte)

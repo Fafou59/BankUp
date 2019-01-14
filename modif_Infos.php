@@ -1,6 +1,6 @@
 <?php
     // Ajout du menu
-    include('menu.php');
+    include('support/menu.php');
 
     // Vérifier si client connecté, sinon renvoie vers connexion
     if (!isset($_SESSION['id'])) {
@@ -25,7 +25,7 @@
                 $telephone = $_POST['telephone'];
 
                 // Connexion à la bdd
-                include('connexion_bdd.php');
+                include('support/connexion_bdd.php');
 
                 //Requête de modification du client
                 $sql = "UPDATE client SET adresse_Mail_Client = '".$_POST['email']."', telephone_Client = '".$_POST['telephone']."' WHERE client.id_Client = '".$_SESSION['id']."'";

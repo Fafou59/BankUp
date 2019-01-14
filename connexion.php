@@ -1,6 +1,6 @@
 <?php
     // Ajout du menu
-    include('menu.php');
+    include('support/menu.php');
 
     // Si déjà connecté, redirection vers espace client
     if (isset($_SESSION['id'])) {
@@ -19,7 +19,7 @@
         <?php
             // Si identifiant (email) et mdp du visiteur renseignés
             if (isset($_POST["identifiant"]) AND isset($_POST["mdp"])) {
-                include('connexion_bdd.php');
+                include('support/connexion_bdd.php');
 
                 // Réaliser requête client
                 $requete = $conn->prepare("SELECT id_Client, adresse_Mail_Client, mdp_Client FROM client WHERE adresse_Mail_Client = '".$_POST["identifiant"]."'");

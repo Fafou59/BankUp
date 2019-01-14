@@ -9,7 +9,7 @@
     $cryptogramme = rand(100,999);
 
     // Connexion à bdd
-    include('connexion_bdd.php');
+    include('support/connexion_bdd.php');
 
     // Réaliser requête ajout de carte
     $sql = "INSERT INTO cb (id_Compte_Rattache, num_Cb, cryptogramme_Cb, date_Expiration_Cb)

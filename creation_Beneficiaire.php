@@ -4,12 +4,12 @@
         header("Location: connexion.php");
     }
     // AJout du menu
-    include('menu.php');
+    include('support/menu.php');
     
     // Vérifier si données disponibles
     if (isset($_POST['libelle_Beneficiaire'], $_POST['iban'], $_SESSION['id'])) {
         // Connexion à la bdd
-        include('connexion_bdd.php');
+        include('support/connexion_bdd.php');
 
         // Réaliser requête compte bénéficiaire à création
         $requete = $conn->prepare("SELECT compte.* FROM compte WHERE '".$_POST['iban']."' = compte.iban_Compte");

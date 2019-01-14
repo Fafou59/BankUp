@@ -7,7 +7,7 @@
     // Si identifiant bénéficiaire renseigné
     if (isset($_POST['id_Beneficiaire'])) {
         // Connexion à bdd
-        include('connexion_bdd.php');
+        include('support/connexion_bdd.php');
 
         // Requête suppression bénéficiaire
         $sql = "DELETE FROM beneficiaire WHERE beneficiaire.id_Beneficiaire = '".$_POST['id_Beneficiaire']."'";

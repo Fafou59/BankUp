@@ -1,13 +1,13 @@
 <?php
     // Ajout du menu
-    include('menu.php');
+    include('support/menu.php');
 
     // Vérifier si client connecté
     if (!isset($_SESSION['id'])) {
         header("Location: connexion.php");
     }
     // Connexion à la bdd
-    include('connexion_bdd.php');
+    include('support/connexion_bdd.php');
 
     // Requête comptes du client pour débit
     $requete = $conn->prepare("SELECT compte.* FROM compte WHERE  compte.id_Detenteur_Compte = '".$_SESSION['id']."'");
@@ -101,7 +101,7 @@
 
                 // Si solde suffisant pour effectuer le virement
                 if ($solde['solde_Compte'] - $_POST['montant'] >= $solde['autorisation_Decouvert_Compte']*-1) {
-                    include('connexion_bdd.php');
+                    // include('support/connexion_bdd.php');
                     // Requête mise à jour solde compte débiteur
                     $sql0 = "UPDATE compte SET solde_Compte = solde_Compte - ".$_POST['montant']." WHERE compte.id_Compte = '".$_POST['emetteur']."'";
                     // Requête mise à jour solde compte créditeur

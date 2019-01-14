@@ -4,7 +4,7 @@
         header("Location: connexion.php");
     }
     // COnnexion à la bdd
-    include('connexion_bdd.php');
+    include('support/connexion_bdd.php');
 
     // Recherche d'un chéquier déjà existant
     $requete = $conn->prepare("SELECT chequier.* FROM chequier WHERE chequier.id_Compte_Rattache = ".$_POST['id_Compte']);

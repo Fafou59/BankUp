@@ -48,7 +48,7 @@
                                 <td><label for="pays">Natonalité :</label></td>
                                 <td><select name="pays" id="pays" required>
                                     <?php // Rechercher la liste des pays dans le fichier correspondant pour alimenter la liste
-                                        $id_fichier= fopen("liste_pays.txt","r");
+                                        $id_fichier= fopen("support/liste_pays.txt","r");
                                         while($ligne=fgets($id_fichier,1024))
                                         {
                                             $ligne=explode(chr(9),$ligne);
@@ -137,7 +137,7 @@
                 }
 
                 // Connexion à la bdd
-                include('connexion_bdd.php');
+                include('support/connexion_bdd.php');
 
                 // Exécution de la requête pour ajouter le client
                 $sql = "INSERT INTO client (civilite_Client, nom_Client, prenom_Client, date_Naissance_Client, adresse_Mail_Client, telephone_Client, num_Voie_Client, voie_Client, code_Postal_Client, ville_Client, mdp_Client, agence_Client, pays_Client)
