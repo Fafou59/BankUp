@@ -16,7 +16,7 @@
     <body>
         <?php
             // Si les données ne sont pas entrées
-            if (!isset($_POST['civilite']), ($_POST["mdp"]), ($_POST['telephone']), ($_POST['email']), ($_POST['ville']), ($_POST['code_Postal']), ($_POST['voie']), ($_POST['numero_Voie']), ($_POST['nom']), ($_POST['prenom']), ($_POST['date_Naissance']), ($_POST['pays'])) { ?>
+            if (!isset($_POST['civilite'], $_POST["mdp"], $_POST['telephone'], $_POST['email'], $_POST['ville'], $_POST['code_Postal'], $_POST['voie'], $_POST['numero_Voie'], $_POST['nom'], $_POST['prenom'], $_POST['date_Naissance'], $_POST['pays'])) { ?>
                 <form class="formulaire" method="post" action="inscription.php" style="border:1px solid #ccc">
                     <div class="container">
                         <h1>Création de votre profil</h1>

@@ -25,7 +25,7 @@
             <div><a href="index.php" title="Accueil"><img id="logo_BankUP" src="logo.png" onclick="location.href='index.php'"alt="Accueil" /></a></div>
             <div id="item_Menu"></div>
             <div id="item_Menu"></div>
-            <?php if ($_SESSION['connecte']==1) { ?>
+            <?php if (isset($_SESSION['id'])) { ?>
                 <div id="item_Menu"><button type="button" onclick="location.href='deconnexion.php'" title="Déconnexion" class="bouton_Connexion">DECONNEXION</button></div>
                 <div id="item_Menu"><button type="button" onclick="location.href='espace_Client.php'" title="Espace Client" class="bouton_Inscription">ESPACE CLIENT</button></div>
             <?php } else {?>
