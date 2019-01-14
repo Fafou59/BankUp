@@ -24,7 +24,7 @@ font-variant: small-caps;
 
 /* Image de fond */
 body {
-  background: url('monde.jpg') no-repeat center fixed;
+  background: url('images/monde.jpg') no-repeat center fixed;
 }
 
 /* Mise en forme de la barre de menu */
@@ -439,6 +439,17 @@ div#operations.item_EC {
   align-content: center;
   }
 
+  div#beneficiaires.item_EC {
+    display: none;
+    padding: 10px 20px;
+    height: 250%;
+    background-color: white;
+    margin-left:10%; 
+    margin-right:10%; 
+    margin-top: 100px;
+    margin-bottom: 50px; 
+    align-content: center;
+    }
 
 div#comptes.item_EC td {
 width: auto;
@@ -553,3 +564,85 @@ div#operations.item_EC td {
   padding-bottom: 5px;
   padding-top: 5px;
 }
+
+
+.ajout_Beneficiaire {
+  border: 1px solid #ddd;
+  padding: 20px 20px 20px 20px;
+}
+
+div#beneficiaires button.bouton_Ouvrir {
+  width: 180px; 
+  float:right; 
+  margin-top: 3px;
+}
+
+div#beneficiaires form.formulaire {
+  width: 100%;
+  margin-left: 0px;
+  margin-top: 3px;
+}
+
+div#beneficiaires.item_EC label {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 20px;
+  }
+.onglet_Beneficiaire {
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  width:auto; 
+  height: auto; 
+  padding-left:0px 0px 0px 0px; 
+  margin:0% 0% 0% 0%;
+  background-color: #555;
+  width:400px;
+}
+
+div#beneficiaires.item_EC h3 {
+  font-variant: small-caps;
+  }
+
+.bouton_Beneficiaire {
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  width:auto; 
+  height: auto; 
+  padding-left:0px 0px 0px 0px; 
+  margin:0% 0% 0% 20%;
+  background-color: #555;
+}
+
+
+
+div#liste_Beneficiaire th, div#liste_Beneficiaire td {
+    border-bottom: 1px solid #ddd;
+    text-align: left; 
+  }
+ 
+  div#liste_Beneficiaire th {
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 35px;
+    padding-bottom:15px;
+  }
+
+  div#liste_Beneficiaire td {
+    padding-top: 10px;
+    padding-bottom:10px; 
+  }
+
+  .bouton_Suppression {
+    background-color:white;
+    cursor: pointer;
+    border: none;
+    outline: 0;
+    width:auto; 
+    height: auto; 
+    padding-left:0px 0px 0px 0px; 
+    margin:5px 0px 5px 0px;
+    vertical-align: middle;
+    }
