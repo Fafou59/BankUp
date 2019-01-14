@@ -297,20 +297,20 @@
             </script>
         </div>
 
-        <div id="operations" class="item_EC">
+                <div id="operations" class="item_EC">
             <h1 style="font-variant: small-caps; margin-bottom: 0px;">vos opérations</h1>
             <p style="font-size: 15px">Retrouvez la liste de vos opérations passées. Vous pouvez également faire un virement un cliquant sur le bouton correspondant.</p>
             <hr>
-            <button type="submit" class="bouton_Ouvrir" onclick="location.href='virement.php'"><img src="images/add-plus-button.png" style="width:25px; margin-right:20px;">Faire un virement</button><br><br>
+            <button type="submit" class="bouton_Ouvrir" onclick="location.href='virement.php'"><img src="add-plus-button.png" style="width:25px; margin-right:20px;">Faire un virement</button><br><br>
             <br>
             <hr>
                     <table id='liste_Operations' width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <th onclick="sortTable(0)">Date</th>
-                    <th onclick="sortTable(1)">Type opération</th>
-                    <th onclick="sortTable(2)">Compte</th>
-                    <th onclick="sortTable(3)">Montant</th>
-                    <th onclick="sortTable(4)">Statut</th>
+                    <th style="width:25%" onclick="sortTable(0)">Date</th>
+                    <th style="width:15%" onclick="sortTable(1)">Type opération</th>
+                    <th style="width:32%" onclick="sortTable(2)">Compte</th>
+                    <th style="width:15%" onclick="sortTable(3)">Montant</th>
+                    <th style="width:13%" onclick="sortTable(4)">Statut</th>
                 </tr>
             <?php while($operation = $operations_emetteur->fetch_row()) { ?>
                 <tr>
@@ -332,58 +332,71 @@
             <?php } ?>
             </table>
         </div>
-
+    
         <div id="beneficiaires" class="item_EC">
-            <h1>Vos bénéficiaires</h1>
-            <p>
-                Vous trouverez ci-dessous la liste de vos bénéficiaires.<br />
-                Vous pouvez ajouter un bénéficiaire avec le formulaire ci-dessous, et supprimer les bénéficiaires déjà enregistrés.
+            <h1 style="font-variant: small-caps;">Vos bénéficiaires</h1>
+            <p style="font-size: 15px">
+                Vous trouverez ci-dessous la liste de vos bénéficiaires. Vous pouvez ajouter un bénéficiaire avec le formulaire ci-dessous, et supprimer les bénéficiaires déjà enregistrés.
             </p>
             <hr>
-            <h3>Ajout d'un bénéficiaire</h3>
-            <p>Merci de compléter les informations ci-dessous pour ajouter un bénéficiaire.</p>
-            <form class="formulaire" method="post" action="creation_Beneficiaire.php" style="border:1px solid #ccc">
-                <div class="container">
+            <table><tr>
+            <table class="onglet_Beneficiaire" style="background-color: #E80969"><tr><td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">ajouter un beneficiaire</h3></td><td><button type="submit" class="bouton_Beneficiaire" style="background-color: #E80969" onclick="toggle_div(this,'ajout_beneficiaire');"><img src="angle-arrow-down.png" style="width:25px"></button></td></tr></table>
+                    
+            <div id='ajout_beneficiaire' style="display:none;">
+            <p style="font-size: 15px">Merci de compléter les informations ci-dessous pour ajouter un bénéficiaire.</p>
+            <form class="formulaire" method="post" action="creation_Beneficiaire.php">
+                <div class="ajout_Beneficiaire">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td><label for="libelle_Beneficiaire">Libellé du bénéficiaire</label> :</td>
+                            <td><label for="libelle_Beneficiaire">libellé du bénéficiaire</label> :</td>
                             <td><input type="text" name="libelle_Beneficiaire" id="libelle_Beneficiaire" size="30" minlength="2" maxlength="30" placeholder="Entrez le libellé du bénéficiaire" required /></td>
                         </tr>
                         <tr>   
-                            <td><label for="iban">IBAN</label> :</td>
+                            <td><label for="iban">iban</label> :</td>
                             <td><input type="text" name="iban" id="iban" size="27" minlength="27" maxlength="27" placeholder="Entrez l'IBAN du bénéficiaire" required /></td>   
                         </tr>
                     </table>
-                    <div class="bouton_Form">
-                        <button type="submit" class="bouton_Valider">Ajouter</button>
-                    </div>
+                </div>
+                <div class="bouton_Form">
+                        <button type="submit" class="bouton_Ouvrir"> <img src="add-plus-button.png" style="width:25px; margin-right:20px;"> Ajouter</button>
                 </div>
             </form>
-            <p>
-                <h3>Vos bénéficiaires enregistrés</h3>
+            </p>
+            </div>
+            </tr>
+            <br>
+            <hr>
+            <br>
+            <tr><table class="onglet_Beneficiaire"><tr><td style="color: white; padding-left:10px; padding-right:5px;"><h3 style="font-weight: normal; font-variant: small-caps;">vos bénéficiares enregistrés</h3></td><td><button type="submit" class="bouton_Beneficiaire" onclick="toggle_div(this,'liste_Beneficiaire');"><img src="angle-arrow-down.png" style="width:25px"></button></td></tr></table>
+                    
+            <div id='liste_Beneficiaire' style="display:none;">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <?php 
                 $i = 1;
-                echo("<tr><td>N°</td><td>Libellé du bénéficiaire</td><td>Statut</td><td>Effectuer virement</td><td>Supprimer</td></tr>");
-                while($beneficiaire = $beneficiaires->fetch_row()) {
+                ?><tr><th style="width:15%">n°</th><th style="width:35%">libellé du bénéficiaire</th><th style="width:20%">statut</th><th style="width:20%"></th><th style="width:10%"></th></th>
+                <?php while($beneficiaire = $beneficiaires->fetch_row()) {
                     if ($beneficiaire[4]==1) {
-                        echo("<tr><td>".$i."</td><td>".$beneficiaire[3]."</td><td>Actif</td>"); ?>
-                        <td><form method="post" action="virement.php">
+                        ?> <tr><td style="width:15%"><?php echo($i) ?></td><td style="width:35%"><?php echo($beneficiaire[3]) ?></td><td style="width:20%">Actif</td>
+                        <td style="width:20%"><form method="post" action="virement.php">
                             <button name="id_Beneficiaire" type="submit" class="bouton_Virement" value="<?php echo ($beneficiaire[0]) ?>">Faire virement</button><br /><br />
-                        </form></td>
-                        <td><form method="post" action="suppression_Beneficiaire.php">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
+                        </form style="height: 40px;"></td>
+                        <td style="width:10%"><form method="post" action="suppression_Beneficiaire.php">
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>"><img src="bin.png" style="width:25px; margin-right:20px;"></button><br /><br />
                         </form></td></tr>
                     <?php } else {
-                        echo("<tr><td>".$i."</td><td>".$beneficiaire[3]."</td><td>En attente</td><td></td>"); ?>
-                        <td><form method="post" action="suppression_Beneficiaire.php">
-                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>">Supprimer</button><br /><br />
+                        ?><tr><td style="width:15%"><?php echo($i) ?></td><td style="width:35%"> <?php echo($beneficiaire[3]) ?></td><td style="width:20%">En attente</td><td style="width:20%"></td>
+                        <td style="width:10%"><form method="post" action="suppression_Beneficiaire.php" style="height: 40px;">
+                            <button name="id_Beneficiaire" type="submit" class="bouton_Suppression" value="<?php echo ($beneficiaire[0]) ?>"><img src="bin.png" style="width:25px; margin-right:20px;"></button><br /><br />
                         </form></td></tr>
                     <?php }
                     $i = $i + 1;
                 }
                 ?>
+                </table>
+            </div>
             </p>
+            </tr></table>
+        </div>
         </div>
     </body>
 
