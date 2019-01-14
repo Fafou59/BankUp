@@ -188,8 +188,8 @@ background-color: rgba(103,103,97);
   background-color: #E80969;
   padding: 15px;
   border-radius: 10px;
-  width: 20px;
-  height: 20px;
+  width: 70px;
+  height: 70px;
   font-size: 20px;
 }
 
@@ -216,7 +216,7 @@ background-color: rgba(103,103,97);
   padding: 10px 0px;
   font-size: 100%;
   width: 25%;
-  height: 40px;
+  height: 50px;
   font-variant: small-caps;
 }
 
@@ -427,6 +427,18 @@ margin-bottom: 50px;
 align-content: center;
 }
 
+div#operations.item_EC {
+  display: none;
+  padding: 10px 20px;
+  height: 250%;
+  background-color: white;
+  margin-left:10%; 
+  margin-right:10%; 
+  margin-top: 100px;
+  margin-bottom: 50px; 
+  align-content: center;
+  }
+
 
 div#comptes.item_EC td {
 width: auto;
@@ -464,7 +476,7 @@ div#comptes.item_EC h3 {
 
   .bouton_Ouvrir {
     border-radius: 0px;
-    width: 180px;
+    width: 200px;
     height: 50px;
     font-size:90%; 
     float:left; 
@@ -527,10 +539,17 @@ div#comptes.item_EC h3 {
   height : 50px;
 }
 
+div#operations.item_EC th, div#operations.item_EC td {
+  border-bottom: 1px solid #ddd;
+  text-align: left; 
+}
 
+div#operations.item_EC th {
+  padding-bottom: 15px;
+  padding-top: 35px;
+}
 
-
-
-
-
-
+div#operations.item_EC td {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
